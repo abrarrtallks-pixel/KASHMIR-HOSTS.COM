@@ -1,322 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Sun Seekers Travels — Your most trusted travel agency in Jammu & Kashmir since 2014. Learn our story, our team, and why thousands choose us.">
-  <title>About Us | Sun Seekers Travels</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀</text></svg>">
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>About Us — KashmirHosts</title>
+  <meta name="description" content="Learn about KashmirHosts — founded by Gazanfar Khan. Offices in Pahalgam Kashmir and Shaikpet Hyderabad."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div>
 
-<!-- PAGE LOADER -->
-<div id="page-loader">
-  <div class="loader-logo">Sun <span>Seekers</span></div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-</div>
-
-<!-- TOAST -->
-<div id="toast-container" class="toast-container"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar" class="scrolled">
-  <div class="nav-container">
-    <a href="../index.html" class="nav-logo">
-      <div class="nav-logo-icon">☀</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-main">Sun Seekers</span>
-        <span class="nav-logo-sub">Travels</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="../index.html#packages" class="nav-cta">Book Tour</a></li>
-    </ul>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="tours.html">Tours</a></li>
+    <li><a href="cars.html">Vehicles</a></li><li><a href="about.html" class="act">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="book.html" class="nav-cart"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cart-badge"></span></a>
+    <div id="nav-user-area" style="display:flex;gap:7px;align-items:center"><a href="login.html" class="nbtn nbtn-ghost">Login</a><a href="book.html" class="nbtn nbtn-y">Book Now</a></div>
+    <button class="hbg" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<!-- HERO -->
-<section class="about-hero">
-  <div>
-    <h1 class="page-hero-title">About Sun Seekers Travels</h1>
-    <p class="page-hero-sub">Your trusted Kashmir travel partner since 2014</p>
-    <div class="page-hero-breadcrumb">
-      <a href="../index.html">Home</a>
-      <span>›</span>
-      <span>About Us</span>
-    </div>
-  </div>
-</section>
-
-<!-- OUR STORY -->
-<section class="section">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-image-wrap reveal-left">
-        <img src="https://images.unsplash.com/photo-1564329494258-3f72215ba175?q=80&w=1170&auto=format&fit=crop" alt="Dal Lake Kashmir" class="about-image">
-        <div class="about-image-badge">
-          <div class="about-image-badge-num">10+</div>
-          <div class="about-image-badge-text">Years Experience</div>
-        </div>
-      </div>
-      <div class="reveal-right">
-        <span class="section-label">Our Story</span>
-        <h2 class="section-title">Born in the Heart of Kashmir</h2>
-        <p style="color:var(--text-light);margin-bottom:20px;line-height:1.9;">
-          Founded in 2014 in the beautiful city of Srinagar, Sun Seekers Travels began with one simple dream — to share the magic of Kashmir with the world. What started as a small family venture has grown into one of J&K's most trusted travel agencies, having served over 5,000 happy travelers.
-        </p>
-        <p style="color:var(--text-light);margin-bottom:20px;line-height:1.9;">
-          We are not just a travel agency — we are local residents who grew up exploring these mountains, valleys, and lakes. Every route we design, every hotel we recommend, and every guide we employ comes from years of firsthand experience and genuine love for this land.
-        </p>
-        <p style="color:var(--text-light);margin-bottom:32px;line-height:1.9;">
-          From the golden meadows of Gulmarg to the shimmering waters of Dal Lake, from the glacier treks of Sonmarg to the lush valleys of Pahalgam — we know every corner of this paradise and we are here to make sure you experience it perfectly.
-        </p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="contact.html" class="btn btn-accent">Get In Touch →</a>
-          <a href="../index.html#packages" class="btn btn-primary">View Packages</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COUNTERS -->
-<section class="counters-section">
-  <div class="container">
-    <div class="counters-grid">
-      <div class="counter-item reveal">
-        <div class="counter-num" data-count="5000" data-suffix="+">0</div>
-        <div class="counter-label">Happy Travelers</div>
-      </div>
-      <div class="counter-item reveal reveal-delay-1">
-        <div class="counter-num" data-count="10" data-suffix="+">0</div>
-        <div class="counter-label">Years Experience</div>
-      </div>
-      <div class="counter-item reveal reveal-delay-2">
-        <div class="counter-num" data-count="50" data-suffix="+">0</div>
-        <div class="counter-label">Tour Packages</div>
-      </div>
-      <div class="counter-item reveal reveal-delay-3">
-        <div class="counter-num" data-count="99" data-suffix="%">0</div>
-        <div class="counter-label">Client Satisfaction</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY CHOOSE US -->
-<section class="section">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="section-label">Why Us</span>
-      <h2 class="section-title">Why Choose Sun Seekers?</h2>
-      <p class="section-subtitle">We go beyond tourism — we create experiences that last a lifetime</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="why-icon">🏔️</span>
-        <h3 class="why-title">Local Expertise</h3>
-        <p class="why-text">Born and raised in Kashmir, our team knows every hidden gem, seasonal secret, and the best time to visit each destination. No tourist-trap routes — ever.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-1">
-        <span class="why-icon">💰</span>
-        <h3 class="why-title">Best Price Guarantee</h3>
-        <p class="why-text">We work directly with hotels, transport providers, and local guides — cutting out middlemen so you get premium experiences at honest prices.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-2">
-        <span class="why-icon">🛡️</span>
-        <h3 class="why-title">Safe & Reliable</h3>
-        <p class="why-text">All our tours are fully insured, our drivers are trained and licensed, and we maintain constant communication throughout your trip for your peace of mind.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-3">
-        <span class="why-icon">🎯</span>
-        <h3 class="why-title">Custom Itineraries</h3>
-        <p class="why-text">Every group is unique. We design personalized itineraries — honeymoon getaways, family vacations, adventure treks, or photography tours — tailored to you.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-4">
-        <span class="why-icon">📱</span>
-        <h3 class="why-title">24/7 WhatsApp Support</h3>
-        <p class="why-text">Got a question at midnight? Need a quick change of plans? Our team is always reachable on WhatsApp, any time of day or night during your trip.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-5">
-        <span class="why-icon">⭐</span>
-        <h3 class="why-title">4.9★ Rated Service</h3>
-        <p class="why-text">Over 500 verified reviews. Our travelers consistently rate us 5 stars for hospitality, punctuality, accommodation quality, and overall experience.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM SECTION -->
-<section class="section" style="background:linear-gradient(135deg,#f0f7ff 0%,var(--snow) 100%);">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="section-label">Our Team</span>
-      <h2 class="section-title">The People Behind the Magic</h2>
-      <p class="section-subtitle">Passionate locals who live and breathe Kashmir every single day</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:20px;">
-      <div class="reveal" style="background:white;border-radius:20px;padding:32px 24px;text-align:center;box-shadow:var(--shadow);">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 16px;">👨‍💼</div>
-        <h3 style="font-size:1.1rem;color:var(--primary);margin-bottom:4px;">Imtiyaz Ahmad</h3>
-        <p style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Founder & CEO</p>
-        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.7;">15+ years in Kashmir tourism. Born in Srinagar, knows every trail, valley and viewpoint in J&K.</p>
-      </div>
-      <div class="reveal reveal-delay-1" style="background:white;border-radius:20px;padding:32px 24px;text-align:center;box-shadow:var(--shadow);">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c3e);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 16px;">🧭</div>
-        <h3 style="font-size:1.1rem;color:var(--primary);margin-bottom:4px;">Aadil Bashir</h3>
-        <p style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Head Guide & Trekking Expert</p>
-        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.7;">Expert mountaineer and nature guide with deep knowledge of Gulmarg, Sonmarg, and high-altitude trails.</p>
-      </div>
-      <div class="reveal reveal-delay-2" style="background:white;border-radius:20px;padding:32px 24px;text-align:center;box-shadow:var(--shadow);">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 16px;">📸</div>
-        <h3 style="font-size:1.1rem;color:var(--primary);margin-bottom:4px;">Sana Bhat</h3>
-        <p style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Tour Coordinator & Photography</p>
-        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.7;">Manages all tour bookings and leads our popular photography tours across the valley.</p>
-      </div>
-      <div class="reveal reveal-delay-3" style="background:white;border-radius:20px;padding:32px 24px;text-align:center;box-shadow:var(--shadow);">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 16px;">🚐</div>
-        <h3 style="font-size:1.1rem;color:var(--primary);margin-bottom:4px;">Tariq Mir</h3>
-        <p style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Transport & Logistics</p>
-        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.7;">Ensures smooth transfers with our fleet of well-maintained, comfortable vehicles for every trip.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section style="background:linear-gradient(135deg,var(--accent) 0%,#d4890a 100%);padding:80px 0;text-align:center;">
-  <div class="container">
-    <div class="reveal">
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--dark);margin-bottom:16px;">Ready to Experience Kashmir?</h2>
-      <p style="color:rgba(0,0,0,0.7);font-size:1.1rem;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;">Book your perfect Kashmir journey today. Our team is ready to create an unforgettable experience just for you.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="../index.html#packages" class="btn btn-primary" style="font-size:1rem;padding:16px 40px;">View Packages ✈</a>
-        <a href="https://wa.me/916005868858" target="_blank" class="btn btn-whatsapp" style="font-size:1rem;padding:16px 40px;">💬 WhatsApp Us</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">☀</div>
-          <div class="footer-logo-name">Sun Seekers Travels</div>
-        </div>
-        <p>Your most trusted travel partner for exploring the magical valleys, peaks and lakes of Jammu & Kashmir. Creating memories that last a lifetime since 2014.</p>
-        <div class="footer-social">
-          <a href="#" class="social-link">📘</a>
-          <a href="#" class="social-link">📸</a>
-          <a href="#" class="social-link">🐦</a>
-          <a href="https://wa.me/916005868858" target="_blank" class="social-link">💬</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Tour Packages</h4>
-        <ul>
-          <li><a href="../index.html#packages">Gulmarg Tour</a></li>
-          <li><a href="../index.html#packages">Pahalgam Tour</a></li>
-          <li><a href="../index.html#packages">Sonmarg Tour</a></li>
-          <li><a href="../index.html#packages">Srinagar Local</a></li>
-          <li><a href="../index.html#packages">Complete J&K</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Us</h4>
-        <ul>
-          <li><a href="tel:+916005868858">📞 +91 6005868858</a></li>
-          <li><a href="https://wa.me/916005868858" target="_blank">💬 WhatsApp</a></li>
-          <li><a href="mailto:sunseekerstravels1@gmail.com">✉ Email Us</a></li>
-          <li><a href="contact.html">📍 Srinagar, J&K</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 Sun Seekers Travels. All rights reserved. | Crafted with ❤ in Kashmir</p>
-      <p><a href="../admin/login.html">Admin Panel</a></p>
-    </div>
-  </div>
-</footer>
-
-<a href="https://wa.me/916005868858?text=Hi%20Sun%20Seekers%20Travels!%20I'm%20interested%20in%20your%20Kashmir%20tour%20packages." target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
-
-<!-- BOOKING MODAL -->
-<div class="modal-overlay" id="booking-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title">Book Your Tour ✈</h2>
-      <p class="modal-subtitle">Fill the form and we'll confirm via WhatsApp</p>
-      <button class="modal-close" onclick="closeBookingModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <form class="booking-form" autocomplete="off">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input type="text" name="name" class="form-control" placeholder="Your full name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXXXXXXX" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" name="email" class="form-control" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Select Package *</label>
-          <select name="package" class="form-control" required>
-            <option value="">Select a Package</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Number of Persons *</label>
-            <select name="persons" class="form-control" required>
-              <option value="">Select</option>
-              <option>1 Person</option><option>2 Persons</option><option>3 Persons</option>
-              <option>4 Persons</option><option>5-8 Persons</option><option>9+ Persons (Group)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Travel Date *</label>
-            <input type="date" name="date" class="form-control" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Additional Message</label>
-          <textarea name="message" class="form-control" rows="3" placeholder="Any special requirements..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">
-          <span class="btn-text">💬 Send Booking via WhatsApp</span>
-          <div class="btn-loader"></div>
-        </button>
-      </form>
-    </div>
-  </div>
+<div class="mob-menu" id="mob-menu">
+  <a href="index.html">&#127968; Home</a><a href="tours.html">&#127956;&#65039; Tours</a><a href="cars.html">&#128663; Vehicles</a>
+  <a href="about.html">&#8505;&#65039; About</a><a href="contact.html">&#128222; Contact</a><a href="login.html">&#128273; Login</a>
 </div>
 
-<script src="../js/main.js"></script>
+<div class="ph"><div class="ph-in">
+  <div class="stag fu" style="margin:0 auto 12px;background:rgba(212,230,0,.14);color:var(--y);border-color:rgba(212,230,0,.2)"><i class="fas fa-users"></i> About Us</div>
+  <h1 class="fu d1">Your Trusted <b>Kashmir</b> Travel Partner</h1>
+  <p class="fu d2">10+ years of creating unforgettable Kashmir memories — from Pahalgam to Gurez Valley</p>
+  <div class="bc"><a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size:.6rem"></i> <span>About</span></div>
+</div></div>
+
+<!-- ABOUT HERO -->
+<section class="sec"><div class="con">
+  <div class="about-grid">
+    <div class="fll">
+      <div class="stag"><i class="fas fa-star"></i> Our Story</div>
+      <h2 class="sh2">Born from a <span>Love for Kashmir</span></h2>
+      <p style="color:var(--g4);line-height:1.82;margin-bottom:14px">KashmirHosts was founded in 2015 by <strong style="color:var(--c)">Gazanfar Khan</strong>, a native of Kashmir who grew up witnessing tourists struggle with natural challenges, security concerns, and widespread rumors about the valley. These early experiences inspired him to create a reliable and authentic travel service that could offer safe, transparent, and memorable journeys across Kashmir.</p>
+      <p style="color:var(--g4);line-height:1.82;margin-bottom:14px">After completing his studies, Gazanfar worked with multinational companies in Hyderabad and Bangalore. During this time, he was constantly approached by colleagues seeking guidance on visiting Kashmir. He also encountered many travelers who had been cheated by fraudulent operators and lacked proper local guidance.</p>
+      <div class="founder-quote">"Driven by my hospitable nature and deep love for my homeland, I set out to transform how people experience Kashmir tourism. Starting with a single vehicle owned by my uncle, I built KashmirHosts on one belief: every guest is family."<br/><br/><strong style="color:var(--yd)">— Gazanfar Khan, Founder &amp; CEO</strong></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+        <a href="tours.html" class="btn btn-y"><i class="fas fa-map-marked-alt"></i> Explore Tours</a>
+        <a href="contact.html" class="btn btn-oy"><i class="fas fa-phone"></i> Contact Us</a>
+      </div>
+    </div>
+    <div class="fr">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1569074187119-c87815b476da?w=800&q=80" alt="Kashmir Valley"/>
+        <div class="about-badge"><strong>2015</strong><span>Est. Year</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- MILESTONES -->
+<section class="sec-sm bg-g1"><div class="con">
+  <div class="milestone-row">
+    <div class="milestone fu"><strong>5000+</strong><span>Happy Travelers</span></div>
+    <div class="milestone fu d1"><strong>10+</strong><span>Years Experience</span></div>
+    <div class="milestone fu d2"><strong>50+</strong><span>Tour Packages</span></div>
+    <div class="milestone fu d3"><strong>7</strong><span>Premium Vehicles</span></div>
+    <div class="milestone fu d4"><strong>4.9&#9733;</strong><span>Average Rating</span></div>
+    <div class="milestone fu d5"><strong>2</strong><span>Office Locations</span></div>
+  </div>
+</div></section>
+
+<!-- VALUES -->
+<section class="sec"><div class="con">
+  <div class="tc" style="margin-bottom:34px">
+    <div class="stag fu"><i class="fas fa-heart"></i> Our Values</div>
+    <h2 class="sh2 fu d1">What We <span>Stand For</span></h2>
+  </div>
+  <div class="g3">
+    <div class="val-card fu d1"><div class="val-ic"><i class="fas fa-handshake"></i></div><h3>Honesty &amp; Transparency</h3><p>No hidden charges, no false promises. Complete transparency in pricing and itineraries — always.</p></div>
+    <div class="val-card fu d2"><div class="val-ic"><i class="fas fa-user-shield"></i></div><h3>Safety Above All</h3><p>POSH-trained drivers, live GPS tracking, verified vehicles. Safety is non-negotiable — especially for ladies and solo travelers.</p></div>
+    <div class="val-card fu d3"><div class="val-ic"><i class="fas fa-leaf"></i></div><h3>Responsible Tourism</h3><p>We respect Kashmir's natural beauty, culture, and people. We actively promote eco-friendly travel and support local communities.</p></div>
+  </div>
+</div></section>
+
+<!-- LADIES COMMITMENT -->
+<section class="sec bg-pk-pale"><div class="con">
+  <div class="ladies-banner fu">
+    <div>
+      <div class="stag stag-pk" style="display:inline-flex;margin-bottom:12px"><i class="fas fa-female"></i> Our Commitment to Women Travelers</div>
+      <h2>We Take Ladies' Safety Seriously</h2>
+      <p>At KashmirHosts, we understand that safety is the number one concern for women traveling to Kashmir. That is why we invested early in POSH training for all staff, built live vehicle tracking, and created dedicated Ladies Escape packages with female guides on request.</p>
+      <div class="lbfeats" style="margin-top:14px">
+        <div class="lbf"><i class="fas fa-user-shield"></i><span>POSH-Trained All Staff</span></div>
+        <div class="lbf"><i class="fas fa-satellite"></i><span>Live GPS on All Vehicles</span></div>
+        <div class="lbf"><i class="fas fa-female"></i><span>Female Guides Available</span></div>
+        <div class="lbf"><i class="fas fa-phone"></i><span>24/7 Dedicated Helpline</span></div>
+      </div>
+    </div>
+    <a href="tours.html" class="btn btn-w" style="color:var(--pkd);flex-shrink:0"><i class="fas fa-heart"></i> View Ladies Tours</a>
+  </div>
+</div></section>
+
+<!-- TEAM -->
+<section class="sec bg-cream"><div class="con">
+  <div class="tc" style="margin-bottom:34px">
+    <div class="stag fu"><i class="fas fa-users"></i> Our Team</div>
+    <h2 class="sh2 fu d1">Meet the <span>People</span> Behind KashmirHosts</h2>
+  </div>
+  <div class="g3">
+    <div class="team-card fu d1">
+      <img class="team-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Gazanfar Khan"/>
+      <div class="team-body"><div class="t-name">Gazanfar Khan</div><div class="t-role">Founder &amp; CEO</div>
+      <p class="t-desc">A Pahalgam native with 10+ years in Kashmir tourism. Started with a single vehicle, now serving 5000+ travelers with a mission to make Kashmir accessible, safe, and authentic for everyone.</p>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:12px">
+        <a href="#" class="sb" style="width:32px;height:32px;font-size:.78rem"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://wa.me/919876543210" class="sb" style="width:32px;height:32px;font-size:.78rem"><i class="fab fa-whatsapp"></i></a>
+      </div></div>
+    </div>
+    <div class="team-card fu d2">
+      <img class="team-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Arif Hussain"/>
+      <div class="team-body"><div class="t-name">Arif Hussain</div><div class="t-role">Head of Operations, Kashmir</div>
+      <p class="t-desc">Manages all ground operations in Pahalgam. His local expertise ensures seamless trip execution, driver coordination, and guest satisfaction at every step.</p></div>
+    </div>
+    <div class="team-card fu d3">
+      <img class="team-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Priya Nair"/>
+      <div class="team-body"><div class="t-name">Priya Nair</div><div class="t-role">Customer Relations, Hyderabad</div>
+      <p class="t-desc">Operating from our Shaikpet, Hyderabad office — Priya helps South Indian travelers plan their perfect Kashmir trip, with special focus on ladies groups.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LOCATIONS -->
+<section class="sec"><div class="con">
+  <div class="tc" style="margin-bottom:34px">
+    <div class="stag fu"><i class="fas fa-map-marker-alt"></i> Our Offices</div>
+    <h2 class="sh2 fu d1">We Are in <span>Two Cities</span></h2>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-card fll">
+      <img class="loc-img" src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=700&q=80" alt="Pahalgam Office"/>
+      <div class="loc-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:11px">
+          <span style="font-size:1.3rem">&#127956;&#65039;</span>
+          <div><h3 style="font-family:var(--ffh);font-size:1.05rem;font-weight:700;color:var(--c)">Pahalgam, Kashmir</h3><span class="bdg bdg-y" style="margin-top:3px;display:inline-flex">Main Office</span></div>
+        </div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-map-marker-alt" style="color:var(--yd)"></i><span>Pahalgam, Anantnag District, J&amp;K — 192125</span></div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-phone" style="color:var(--yd)"></i><span>+91 98765 43210</span></div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-clock" style="color:var(--yd)"></i><span>Open daily 7:00 AM — 9:00 PM</span></div>
+      </div>
+    </div>
+    <div class="loc-card fr">
+      <img class="loc-img" src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=700&q=80" alt="Hyderabad Office"/>
+      <div class="loc-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:11px">
+          <span style="font-size:1.3rem">&#127963;&#65039;</span>
+          <div><h3 style="font-family:var(--ffh);font-size:1.05rem;font-weight:700;color:var(--c)">Shaikpet, Hyderabad</h3><span class="bdg bdg-g" style="margin-top:3px;display:inline-flex">South India Office</span></div>
+        </div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-map-marker-alt" style="color:var(--yd)"></i><span>Shaikpet, Hyderabad, Telangana — 500008</span></div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-phone" style="color:var(--yd)"></i><span>+91 98765 43211</span></div>
+        <div class="ft-ci" style="color:var(--g4)"><i class="fas fa-clock" style="color:var(--yd)"></i><span>Mon–Sat 9:00 AM — 7:00 PM</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="ft">
+    <div class="ft-brand"><a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a><p>Founded by Gazanfar Khan in 2015. "Hospitality that feels like family."</p><div class="ft-soc"><a href="#" class="sb"><i class="fab fa-facebook-f"></i></a><a href="#" class="sb"><i class="fab fa-instagram"></i></a><a href="https://wa.me/919876543210" class="sb"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="ft-col"><h4>Quick Links</h4><ul class="ft-links"><li><a href="tours.html"><i class="fas fa-chevron-right"></i>Tour Packages</a></li><li><a href="cars.html"><i class="fas fa-chevron-right"></i>Our Vehicles</a></li><li><a href="contact.html"><i class="fas fa-chevron-right"></i>Contact</a></li><li><a href="privacy.html"><i class="fas fa-chevron-right"></i>Privacy Policy</a></li></ul></div>
+    <div class="ft-col"><h4>Destinations</h4><ul class="ft-links"><li><a href="tours.html"><i class="fas fa-mountain"></i>Pahalgam</a></li><li><a href="tours.html"><i class="fas fa-snowflake"></i>Gulmarg</a></li><li><a href="tours.html"><i class="fas fa-water"></i>Dal Lake</a></li><li><a href="tours.html"><i class="fas fa-gem"></i>Hidden Gems</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Pahalgam, Kashmir</span></div><div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Shaikpet, Hyderabad</span></div><div class="ft-ci"><i class="fas fa-phone"></i><span>+91 98765 43210</span></div></div>
+  </div>
+  <div class="fb"><span>&#169; 2025 KashmirHosts | Founder &amp; CEO: <strong style="color:var(--y)">Gazanfar Khan</strong></span><span><a href="privacy.html">Privacy Policy</a></span></div>
+</footer>
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<div id="toasts"></div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT.firebaseapp.com",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

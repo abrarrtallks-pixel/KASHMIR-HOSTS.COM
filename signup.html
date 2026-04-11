@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Create Account — KashmirHosts</title>
+  <meta name="description" content="Join KashmirHosts — free account for Kashmir tour bookings."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div><div id="toasts"></div>
+<div class="auth-wrap">
+  <div class="auth-l">
+    <div class="auth-l-bg" style="background-image:url('https://images.unsplash.com/photo-1569074187119-c87815b476da?w=900&q=80')"></div>
+    <div class="auth-l-con">
+      <a href="index.html" class="nav-logo" style="font-size:1.6rem;margin-bottom:20px;display:block">Kashmir<b>Hosts</b></a>
+      <h2>Start Your Kashmir<br/>Journey Today! &#127800;</h2>
+      <p>Join 5000+ happy travelers. Create your free account and book your dream Kashmir trip.</p>
+      <div class="a-feat"><i class="fas fa-gift"></i><span>Welcome bonus on first booking</span></div>
+      <div class="a-feat"><i class="fas fa-satellite"></i><span>Live vehicle tracking access</span></div>
+      <div class="a-feat" style="color:rgba(255,255,255,.88)"><i class="fas fa-female" style="color:var(--pk)"></i><span>Ladies Escape packages available</span></div>
+      <div class="a-feat"><i class="fas fa-history"></i><span>Complete booking history</span></div>
+    </div>
+  </div>
+  <div class="auth-r">
+    <div class="a-form">
+      <h2>Create Account</h2>
+      <p>Already registered? <a href="login.html">Sign in here</a></p>
+      <button class="g-btn" onclick="handleGoogle()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google"/> Sign up with Google
+      </button>
+      <div class="a-div"><span>or create with email</span></div>
+      <div id="s-err" class="alert al-e" style="display:none"></div>
+      <form onsubmit="handleSignup(event)">
+        <div class="f2">
+          <div class="fg"><label class="flbl">First Name *</label><div class="iw"><i class="fas fa-user ii"></i><input type="text" id="s-fname" class="fc" placeholder="First name" required/></div></div>
+          <div class="fg"><label class="flbl">Last Name *</label><div class="iw"><i class="fas fa-user ii"></i><input type="text" id="s-lname" class="fc" placeholder="Last name" required/></div></div>
+        </div>
+        <div class="fg"><label class="flbl">Email Address *</label><div class="iw"><i class="fas fa-envelope ii"></i><input type="email" id="s-email" class="fc" placeholder="you@example.com" required/></div></div>
+        <div class="fg"><label class="flbl">Phone Number</label><div class="iw"><i class="fas fa-phone ii"></i><input type="tel" id="s-phone" class="fc" placeholder="+91 XXXXX XXXXX"/></div></div>
+        <div class="fg"><label class="flbl">Password *</label>
+          <div class="iw"><i class="fas fa-lock ii"></i><input type="password" id="s-pass" class="fc" placeholder="Min. 8 characters" required minlength="8" oninput="checkPwStrength(this.value)"/>
+            <button type="button" class="eye" onclick="togglePw('s-pass',this)"><i class="fas fa-eye"></i></button></div>
+          <div class="pw-strength" id="pw-strength" style="display:none"><div class="pw-bar"><div class="pw-fill" id="pw-fill"></div></div><span id="pw-lbl" style="font-size:.72rem;color:var(--g3)"></span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:15px">
+          <input type="checkbox" id="agree" required style="width:15px;height:15px;margin-top:2px;accent-color:var(--y);cursor:pointer;flex-shrink:0"/>
+          <label for="agree" style="font-size:.8rem;color:var(--g3);cursor:pointer">I agree to the <a href="privacy.html">Privacy Policy</a> and Terms of Service</label>
+        </div>
+        <button type="submit" id="s-btn" class="btn btn-y btn-bl"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
+      <div class="a-foot"><p>Already registered? <a href="login.html">Sign in</a></p><p><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></p></div>
+    </div>
+  </div>
+</div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",
+    projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",
+    messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

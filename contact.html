@@ -1,301 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact Sun Seekers Travels — Call, WhatsApp or email us to book your Kashmir tour. Based in Srinagar, J&K.">
-  <title>Contact Us | Sun Seekers Travels</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀</text></svg>">
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Contact Us — KashmirHosts</title>
+  <meta name="description" content="Contact KashmirHosts for tour bookings, vehicle rentals, and travel queries."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div>
 
-<!-- PAGE LOADER -->
-<div id="page-loader">
-  <div class="loader-logo">Sun <span>Seekers</span></div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-</div>
-
-<!-- TOAST -->
-<div id="toast-container" class="toast-container"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar" class="scrolled">
-  <div class="nav-container">
-    <a href="../index.html" class="nav-logo">
-      <div class="nav-logo-icon">☀</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-main">Sun Seekers</span>
-        <span class="nav-logo-sub">Travels</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-      <li><a href="../index.html#packages" class="nav-cta">Book Tour</a></li>
-    </ul>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="tours.html">Tours</a></li><li><a href="cars.html">Vehicles</a></li><li><a href="about.html">About</a></li><li><a href="contact.html" class="act">Contact</a></li></ul>
+  <div class="nav-right">
+    <a href="book.html" class="nav-cart"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cart-badge"></span></a>
+    <div id="nav-user-area" style="display:flex;gap:7px;align-items:center"><a href="login.html" class="nbtn nbtn-ghost">Login</a><a href="book.html" class="nbtn nbtn-y">Book Now</a></div>
+    <button class="hbg" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="mob-menu" id="mob-menu"><a href="index.html">&#127968; Home</a><a href="tours.html">&#127956;&#65039; Tours</a><a href="cars.html">&#128663; Vehicles</a><a href="about.html">&#8505;&#65039; About</a><a href="contact.html">&#128222; Contact</a><a href="login.html">&#128273; Login</a></div>
 
-<!-- HERO -->
-<section class="contact-hero">
-  <div>
-    <h1 class="page-hero-title">Get In Touch</h1>
-    <p class="page-hero-sub">We're here to plan your perfect Kashmir journey</p>
-    <div class="page-hero-breadcrumb">
-      <a href="../index.html">Home</a>
-      <span>›</span>
-      <span>Contact</span>
-    </div>
-  </div>
-</section>
+<div class="ph"><div class="ph-in">
+  <div class="stag fu" style="margin:0 auto 12px;background:rgba(212,230,0,.14);color:var(--y);border-color:rgba(212,230,0,.2)"><i class="fas fa-headset"></i> Contact Us</div>
+  <h1 class="fu d1">We Are Here to <b>Help You Plan</b></h1>
+  <p class="fu d2">Reach out for bookings, inquiries, or just a chat about Kashmir</p>
+  <div class="bc"><a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size:.6rem"></i> <span>Contact</span></div>
+</div></div>
 
-<!-- QUICK CONTACT STRIP -->
-<section style="background:linear-gradient(135deg,var(--primary) 0%,var(--mid) 100%);padding:40px 0;">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;text-align:center;">
-      <a href="tel:+916005868858" style="text-decoration:none;color:white;padding:20px;border-radius:14px;background:rgba(255,255,255,0.07);transition:all 0.3s;display:block;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-        <div style="font-size:2rem;margin-bottom:8px;">📞</div>
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">Call Us</div>
-        <div style="color:var(--accent-light);font-size:0.88rem;">+91 6005868858</div>
-      </a>
-      <a href="https://wa.me/916005868858" target="_blank" style="text-decoration:none;color:white;padding:20px;border-radius:14px;background:rgba(255,255,255,0.07);transition:all 0.3s;display:block;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-        <div style="font-size:2rem;margin-bottom:8px;">💬</div>
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">WhatsApp</div>
-        <div style="color:var(--accent-light);font-size:0.88rem;">Chat Instantly</div>
-      </a>
-      <a href="mailto:sunseekerstravels1@gmail.com" style="text-decoration:none;color:white;padding:20px;border-radius:14px;background:rgba(255,255,255,0.07);transition:all 0.3s;display:block;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-        <div style="font-size:2rem;margin-bottom:8px;">✉️</div>
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">Email Us</div>
-        <div style="color:var(--accent-light);font-size:0.88rem;">sunseekerstravels1@gmail.com</div>
-      </a>
-      <div style="color:white;padding:20px;border-radius:14px;background:rgba(255,255,255,0.07);">
-        <div style="font-size:2rem;margin-bottom:8px;">📍</div>
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">Our Office</div>
-        <div style="color:var(--accent-light);font-size:0.88rem;">Srinagar, J&K, India</div>
+<section class="sec"><div class="con">
+  <div class="ct-grid">
+    <div>
+      <div class="stag fll"><i class="fas fa-map-marker-alt"></i> Get in Touch</div>
+      <h2 class="sh2 fll d1">Contact <span>KashmirHosts</span></h2>
+      <p class="sdesc fll d2" style="margin-bottom:22px">Whether you need help planning your Kashmir trip or have questions, we are always available.</p>
+      <div class="ct-info">
+        <div class="cm"><div class="cm-ic"><i class="fas fa-phone-alt"></i></div><div><div class="cm-t">Call Us</div><div class="cm-d">+91 98765 43210 (Kashmir)<br/>+91 98765 43211 (Hyderabad)<br/><small style="color:var(--g3)">Available 7 AM to 9 PM daily</small></div></div></div>
+        <div class="cm"><div class="cm-ic"><i class="fab fa-whatsapp" style="color:#25D366"></i></div><div><div class="cm-t">WhatsApp</div><div class="cm-d">+91 98765 43210<br/><a href="https://wa.me/919876543210" style="color:var(--yd);font-weight:600">Chat Now on WhatsApp</a></div></div></div>
+        <div class="cm"><div class="cm-ic"><i class="fas fa-envelope"></i></div><div><div class="cm-t">Email Us</div><div class="cm-d">info@kashmirhosts.com<br/>bookings@kashmirhosts.com<br/><small style="color:var(--g3)">We reply within 2 hours</small></div></div></div>
+        <div class="cm"><div class="cm-ic"><i class="fas fa-map-marker-alt"></i></div><div><div class="cm-t">Visit Our Offices</div><div class="cm-d">&#127956;&#65039; <strong>Kashmir:</strong> Pahalgam, Anantnag, J&amp;K — 192125<br/>&#127963;&#65039; <strong>Hyderabad:</strong> Shaikpet, Telangana — 500008</div></div></div>
+        <div class="cm" style="border:none;margin:0;padding:0"><div class="cm-ic"><i class="fas fa-globe"></i></div><div><div class="cm-t">Website</div><div class="cm-d"><a href="https://kashmirhosts.com" style="color:var(--yd)">kashmirhosts.com</a></div></div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- CONTACT MAIN -->
-<section class="section">
-  <div class="container">
-    <div class="contact-grid">
-
-      <!-- INFO CARD -->
-      <div class="contact-info-card reveal-left">
-        <div style="margin-bottom:28px;">
-          <span class="section-label">Contact Info</span>
-          <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--primary);margin-top:8px;">We'd Love to Hear From You</h2>
-          <p style="color:var(--text-light);margin-top:12px;line-height:1.8;font-size:0.9rem;">Reach out for tour bookings, custom packages, pricing, or any queries. Our team responds within 30 minutes on WhatsApp.</p>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📞</div>
-          <div>
-            <div class="contact-info-label">Phone / WhatsApp</div>
-            <div class="contact-info-value">
-              <a href="tel:+916005868858">+91 6005868858</a>
-            </div>
+    <div class="fr">
+      <div class="ct-form">
+        <h3 style="font-family:var(--ffh);font-size:1.26rem;font-weight:700;margin-bottom:5px;color:var(--c)">Send Us a Message</h3>
+        <p style="color:var(--g3);font-size:.83rem;margin-bottom:18px">We will reply within 2 hours!</p>
+        <div id="ct-succ" class="alert al-s" style="display:none"><i class="fas fa-check-circle"></i> Message sent! We will reply soon.</div>
+        <form onsubmit="submitContact(event)">
+          <div class="f2">
+            <div class="fg"><label class="flbl">Full Name *</label><input type="text" id="ct-name" class="fc" required/></div>
+            <div class="fg"><label class="flbl">Phone Number</label><input type="tel" id="ct-phone" class="fc" placeholder="+91 XXXXX XXXXX"/></div>
           </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">✉️</div>
-          <div>
-            <div class="contact-info-label">Email Address</div>
-            <div class="contact-info-value">
-              <a href="mailto:sunseekerstravels1@gmail.com">sunseekerstravels1@gmail.com</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">📍</div>
-          <div>
-            <div class="contact-info-label">Office Address</div>
-            <div class="contact-info-value">Srinagar, Jammu & Kashmir, India — 190001</div>
-          </div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-info-icon">⏰</div>
-          <div>
-            <div class="contact-info-label">Working Hours</div>
-            <div class="contact-info-value">Mon–Sat: 8:00 AM – 8:00 PM IST<br><span style="font-weight:400;color:var(--text-light);font-size:0.85rem;">WhatsApp: Available 24/7</span></div>
-          </div>
-        </div>
-
-        <!-- Social Links -->
-        <div style="margin-top:24px;padding-top:24px;border-top:1px solid #edf2f7;">
-          <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:14px;">Follow Us</div>
-          <div style="display:flex;gap:10px;">
-            <a href="#" style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#1877f2,#0c5cbf);color:white;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;">📘</a>
-            <a href="#" style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#e1306c,#c13584);color:white;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;">📸</a>
-            <a href="https://wa.me/916005868858" target="_blank" style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#25d366,#128c3e);color:white;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;">💬</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTACT FORM -->
-      <div class="contact-form-card reveal-right">
-        <span class="section-label">Send Message</span>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--primary);margin:8px 0 20px;">Tell Us About Your Trip</h3>
-        <form class="contact-form" autocomplete="off">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Full Name *</label>
-              <input type="text" name="name" class="form-control" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Phone / WhatsApp *</label>
-              <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXXXXXXX" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" name="email" class="form-control" placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Subject *</label>
-            <select name="subject" class="form-control" required>
-              <option value="">Select a topic</option>
-              <option>Tour Package Enquiry</option>
-              <option>Custom Itinerary Request</option>
-              <option>Group Booking</option>
-              <option>Honeymoon Package</option>
-              <option>Pricing Information</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Your Message *</label>
-            <textarea name="message" class="form-control" rows="5" placeholder="Tell us your travel dates, group size, preferred destinations, budget or any special requirements..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit">
-            <span class="btn-text">💬 Send via WhatsApp</span>
-            <div class="btn-loader"></div>
-          </button>
-          <p style="text-align:center;color:var(--text-light);font-size:0.8rem;margin-top:12px;">We typically respond within 30 minutes on WhatsApp</p>
+          <div class="fg"><label class="flbl">Email Address *</label><input type="email" id="ct-email" class="fc" required/></div>
+          <div class="fg"><label class="flbl">Subject</label>
+            <select id="ct-sub" class="fc"><option>Select inquiry type</option><option>Tour Package Inquiry</option><option>Vehicle Rental</option><option>Ladies Escape Inquiry</option><option>Booking Modification</option><option>Cancellation &amp; Refund</option><option>General Information</option></select></div>
+          <div class="fg"><label class="flbl">Message *</label><textarea id="ct-msg" class="fc" placeholder="Tell us about your travel plans, dates, group size, special requirements..." required></textarea></div>
+          <button type="submit" class="btn btn-y btn-bl" id="ct-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
         </form>
       </div>
     </div>
+  </div>
 
-    <!-- MAP -->
-    <div class="map-container reveal">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105867.96826397263!2d74.72785814453124!3d34.07817949999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18501e5d61289%3A0xe9e4e87a90b59e42!2sSrinagar%2C%20Jammu%20%26%20Kashmir!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Sun Seekers Travels Location - Srinagar, Kashmir">
-      </iframe>
+  <!-- MAPS -->
+  <div class="map-grid" style="margin-top:52px">
+    <div class="map-wrap fu">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13239!2d75.3125!3d34.0154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18f3d8e19a7c7%3A0x6f0e08c1e6a4abcd!2sPahalgam!5e0!3m2!1sen!2sin!4v1700000000" allowfullscreen="" loading="lazy" title="Pahalgam Office"></iframe>
+      <div class="map-lb"><i class="fas fa-map-marker-alt"></i><span>Pahalgam, Kashmir — Main Office</span></div>
+    </div>
+    <div class="map-wrap fu d1">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15226!2d78.4167!3d17.4000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97d8c5bb6adb%3A0x5e2ef88c4e6c3710!2sShaikpet!5e0!3m2!1sen!2sin!4v1700000000" allowfullscreen="" loading="lazy" title="Hyderabad Office"></iframe>
+      <div class="map-lb"><i class="fas fa-map-marker-alt"></i><span>Shaikpet, Hyderabad — South India Office</span></div>
     </div>
   </div>
-</section>
+</div></section>
 
 <!-- FAQ -->
-<section class="section" style="background:linear-gradient(180deg,var(--snow) 0%,#e8f4ff 100%);padding-top:0;">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <p class="section-subtitle">Quick answers to your most common questions about Kashmir tours</p>
-    </div>
-    <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
-      <div class="reveal" style="background:white;border-radius:16px;padding:24px 28px;box-shadow:0 4px 20px rgba(10,61,98,0.07);">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:10px;font-size:1rem;">❓ When is the best time to visit Kashmir?</div>
-        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.8;margin:0;">Kashmir is beautiful year-round! Spring (March–May) brings flowers, Summer (June–August) is ideal for trekking, Autumn (Sep–Nov) has stunning foliage, and Winter (Dec–Feb) offers snow activities in Gulmarg.</p>
-      </div>
-      <div class="reveal reveal-delay-1" style="background:white;border-radius:16px;padding:24px 28px;box-shadow:0 4px 20px rgba(10,61,98,0.07);">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:10px;font-size:1rem;">❓ Are the tour prices per person or per group?</div>
-        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.8;margin:0;">All listed prices are per person. Group bookings of 5+ people receive special discounts. Contact us on WhatsApp for group pricing and custom packages.</p>
-      </div>
-      <div class="reveal reveal-delay-2" style="background:white;border-radius:16px;padding:24px 28px;box-shadow:0 4px 20px rgba(10,61,98,0.07);">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:10px;font-size:1rem;">❓ What is included in the tour packages?</div>
-        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.8;margin:0;">Our packages typically include accommodation, transport, guided sightseeing, and breakfast. Specific inclusions vary by package — contact us for a detailed itinerary of any tour.</p>
-      </div>
-      <div class="reveal reveal-delay-3" style="background:white;border-radius:16px;padding:24px 28px;box-shadow:0 4px 20px rgba(10,61,98,0.07);">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:10px;font-size:1rem;">❓ Can you arrange custom/honeymoon packages?</div>
-        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.8;margin:0;">Absolutely! We specialize in custom itineraries — honeymoon packages with houseboat stays, photography tours, adventure treks, family tours, and corporate retreats. Just tell us your vision.</p>
-      </div>
-      <div class="reveal reveal-delay-4" style="background:white;border-radius:16px;padding:24px 28px;box-shadow:0 4px 20px rgba(10,61,98,0.07);">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:10px;font-size:1rem;">❓ Is Kashmir safe for tourists?</div>
-        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.8;margin:0;">Yes! Kashmir is safe and welcoming for tourists. Millions visit annually. We ensure all our tours follow the latest safety guidelines and our local team is always available to assist you.</p>
-      </div>
-    </div>
+<section class="sec bg-g1"><div class="con">
+  <div class="tc" style="margin-bottom:32px">
+    <div class="stag fu"><i class="fas fa-question-circle"></i> FAQ</div>
+    <h2 class="sh2 fu d1">Frequently <span>Asked Questions</span></h2>
   </div>
-</section>
-
-<!-- CTA -->
-<section style="background:linear-gradient(135deg,var(--accent) 0%,#d4890a 100%);padding:80px 0;text-align:center;">
-  <div class="container">
-    <div class="reveal">
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--dark);margin-bottom:16px;">Still Have Questions?</h2>
-      <p style="color:rgba(0,0,0,0.7);font-size:1.1rem;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;">We're just a WhatsApp message away. Our team responds within minutes!</p>
-      <a href="https://wa.me/916005868858?text=Hi%20Sun%20Seekers!%20I%20have%20a%20question%20about%20your%20Kashmir%20tours." target="_blank" class="btn btn-primary" style="font-size:1rem;padding:16px 44px;">💬 WhatsApp Us Now</a>
-    </div>
+  <div style="max-width:700px;margin:0 auto">
+    <div class="faq-item fu d1"><div class="faq-q"><i class="fas fa-circle"></i>Is Kashmir safe for ladies and solo female travelers?</div><p class="faq-a">Yes! KashmirHosts specifically invests in POSH-trained drivers and guides, live GPS tracking, female guide availability, and a dedicated 24/7 support line — making us the number one choice for solo female and ladies group travelers.</p></div>
+    <div class="faq-item fu d2"><div class="faq-q"><i class="fas fa-circle"></i>How far in advance should I book?</div><p class="faq-a">We recommend booking 2 to 3 weeks in advance for peak season (April to June, September to November). For Ladies Escape and Honeymoon packages, 1 month ahead is ideal to secure female guides and premium accommodation.</p></div>
+    <div class="faq-item fu d3"><div class="faq-q"><i class="fas fa-circle"></i>Do you provide airport pickup from Srinagar?</div><p class="faq-a">Yes! All packages include Srinagar Airport or Railway Station pickup. Our POSH-trained driver will be there with a name board. For ladies, we can arrange a female escort on request.</p></div>
+    <div class="faq-item fu d4"><div class="faq-q"><i class="fas fa-circle"></i>What is your cancellation policy?</div><p class="faq-a">Free cancellation up to 48 hours before. 50% refund for cancellations between 24 and 48 hours. Rescheduling is always free up to 72 hours before travel.</p></div>
+    <div class="faq-item fu d5"><div class="faq-q"><i class="fas fa-circle"></i>Can I customize a tour package?</div><p class="faq-a">Absolutely! All packages are fully customizable. WhatsApp us or fill the form above with your dates, group size, and preferences — we will create a personalized itinerary within hours.</p></div>
   </div>
-</section>
+</div></section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">☀</div>
-          <div class="footer-logo-name">Sun Seekers Travels</div>
-        </div>
-        <p>Your most trusted travel partner for exploring the magical valleys, peaks and lakes of Jammu & Kashmir. Creating memories that last a lifetime since 2014.</p>
-        <div class="footer-social">
-          <a href="#" class="social-link">📘</a>
-          <a href="#" class="social-link">📸</a>
-          <a href="#" class="social-link">🐦</a>
-          <a href="https://wa.me/916005868858" target="_blank" class="social-link">💬</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Tour Packages</h4>
-        <ul>
-          <li><a href="../index.html#packages">Gulmarg Tour</a></li>
-          <li><a href="../index.html#packages">Pahalgam Tour</a></li>
-          <li><a href="../index.html#packages">Sonmarg Tour</a></li>
-          <li><a href="../index.html#packages">Srinagar Local</a></li>
-          <li><a href="../index.html#packages">Complete J&K</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Us</h4>
-        <ul>
-          <li><a href="tel:+916005868858">📞 +91 6005868858</a></li>
-          <li><a href="https://wa.me/916005868858" target="_blank">💬 WhatsApp</a></li>
-          <li><a href="mailto:sunseekerstravels1@gmail.com">✉ Email Us</a></li>
-          <li><a href="contact.html">📍 Srinagar, J&K</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 Sun Seekers Travels. All rights reserved. | Crafted with ❤ in Kashmir</p>
-      <p><a href="../admin/login.html">Admin Panel</a></p>
-    </div>
+  <div class="ft">
+    <div class="ft-brand"><a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a><p>"Hospitality that feels like family." Founded by Gazanfar Khan, 2015.</p><div class="ft-soc"><a href="#" class="sb"><i class="fab fa-facebook-f"></i></a><a href="#" class="sb"><i class="fab fa-instagram"></i></a><a href="https://wa.me/919876543210" class="sb"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="ft-col"><h4>Quick Links</h4><ul class="ft-links"><li><a href="tours.html"><i class="fas fa-chevron-right"></i>Tour Packages</a></li><li><a href="cars.html"><i class="fas fa-chevron-right"></i>Our Vehicles</a></li><li><a href="about.html"><i class="fas fa-chevron-right"></i>About Us</a></li></ul></div>
+    <div class="ft-col"><h4>Tour Types</h4><ul class="ft-links"><li><a href="tours.html"><i class="fas fa-mountain"></i>Nature Tours</a></li><li><a href="tours.html"><i class="fas fa-female"></i>Ladies Escape</a></li><li><a href="tours.html"><i class="fas fa-heart"></i>Honeymoon</a></li><li><a href="tours.html"><i class="fas fa-users"></i>Family Tours</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Pahalgam, Kashmir</span></div><div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Shaikpet, Hyderabad</span></div><div class="ft-ci"><i class="fas fa-phone"></i><span>+91 98765 43210</span></div></div>
   </div>
+  <div class="fb"><span>&#169; 2025 KashmirHosts | CEO: <strong style="color:var(--y)">Gazanfar Khan</strong></span><span><a href="privacy.html">Privacy Policy</a></span></div>
 </footer>
-
-<a href="https://wa.me/916005868858?text=Hi%20Sun%20Seekers%20Travels!%20I'm%20interested%20in%20your%20Kashmir%20tour%20packages." target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
-
-<script src="../js/main.js"></script>
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<div id="toasts"></div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT.firebaseapp.com",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Book Now — KashmirHosts</title>
+  <meta name="description" content="Review your cart and checkout."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div>
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="tours.html">Tours</a></li><li><a href="cars.html">Vehicles</a></li></ul>
+  <div class="nav-right"><div id="nav-user-area" style="display:flex;gap:7px;align-items:center"><a href="login.html" class="nbtn nbtn-ghost">Login</a></div><button class="hbg" id="hamburger"><span></span><span></span><span></span></button></div>
+</nav>
+<div class="mob-menu" id="mob-menu"><a href="index.html">&#127968; Home</a><a href="tours.html">&#127956;&#65039; Tours</a><a href="cars.html">&#128663; Vehicles</a><a href="login.html">&#128273; Login</a></div>
+
+<div class="ph" style="padding:115px 5% 54px"><div class="ph-in">
+  <h1 class="fu"><b>Your Cart</b></h1>
+  <p class="fu d1">Review your selections and proceed to checkout</p>
+  <div class="bc"><a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size:.6rem"></i> <span>Book Now</span></div>
+</div></div>
+
+<section class="sec" style="padding-top:38px"><div class="con">
+  <div class="bk-layout">
+    <div>
+      <div class="bk-hd">
+        <h2><i class="fas fa-list"></i> Selected Items</h2>
+        <button class="btn btn-oy btn-sm" onclick="Cart.clear();renderCart()"><i class="fas fa-trash"></i> Clear All</button>
+      </div>
+      <div id="cart-items"></div>
+      <div id="bform-sec" style="display:none;margin-top:22px">
+        <div class="bk-hd"><h2><i class="fas fa-user"></i> Travel Details</h2></div>
+        <div class="bk-form" style="margin-top:10px">
+          <div class="f2">
+            <div class="fg"><label class="flbl">Full Name *</label><input type="text" class="fc" id="b-name" placeholder="Your full name" required/></div>
+            <div class="fg"><label class="flbl">Phone *</label><input type="tel" class="fc" id="b-phone" placeholder="+91 XXXXX XXXXX" required/></div>
+          </div>
+          <div class="f2">
+            <div class="fg"><label class="flbl">Travel Date *</label><input type="date" class="fc" id="b-date" required/></div>
+            <div class="fg"><label class="flbl">No. of Travellers</label>
+              <select class="fc" id="b-guests"><option>1 Person</option><option selected>2 Persons</option><option>3-4 Persons</option><option>5-6 Persons</option><option>7+ Persons</option></select></div>
+          </div>
+          <div class="fg"><label class="flbl">Pickup Location</label>
+            <select class="fc" id="b-pickup"><option>Srinagar Airport</option><option>Srinagar Railway Station</option><option>Jammu Airport</option><option>Jammu Railway Station</option></select></div>
+          <div class="fg"><label class="flbl">Special Requests</label>
+            <textarea class="fc" id="b-notes" placeholder="Dietary needs, ladies-only driver, POSH guide preference, accessibility needs..."></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="ord-sum">
+        <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+        <div id="sum-items"></div>
+        <div class="divider"></div>
+        <div class="or-row"><span>Subtotal</span><span id="sum-sub">&#8377;0</span></div>
+        <div class="or-row"><span>Service Tax (5%)</span><span id="sum-tax">&#8377;0</span></div>
+        <div class="or-row"><span style="color:var(--green)">Member Discount (2%)</span><span id="sum-disc" style="color:var(--green)">-&#8377;0</span></div>
+        <div class="divider"></div>
+        <div class="or-row or-tot"><strong>Total</strong><strong class="price" id="sum-tot">&#8377;0</strong></div>
+        <button class="btn btn-y btn-bl" style="margin-top:12px" id="checkout-btn" onclick="handleCheckout()"><i class="fas fa-credit-card"></i> Proceed to Checkout</button>
+        <a href="tours.html" class="btn btn-oy btn-bl" style="margin-top:8px"><i class="fas fa-plus"></i> Add More Tours</a>
+        <div class="trust-r">
+          <div class="trb"><i class="fas fa-shield-alt"></i><span>Secure Booking</span></div>
+          <div class="trb"><i class="fas fa-undo"></i><span>Free Cancellation</span></div>
+          <div class="trb"><i class="fas fa-headset"></i><span>24/7 Support</span></div>
+        </div>
+      </div>
+      <div class="help-box">
+        <h4>Need Help?</h4>
+        <p>Talk to our experts for assistance</p>
+        <a href="https://wa.me/919876543210" class="btn btn-y btn-bl" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        <a href="tel:+919876543210" class="btn btn-oy btn-bl" style="margin-top:8px"><i class="fas fa-phone"></i> +91 98765 43210</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+<footer><div class="fb" style="padding:15px 5%"><span>&#169; 2025 KashmirHosts | CEO: <strong style="color:var(--y)">Gazanfar Khan</strong></span><span><a href="privacy.html">Privacy Policy</a></span></div></footer>
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<div id="toasts"></div>
+<div class="suc-modal" id="suc-modal">
+  <div class="suc-card">
+    <div style="font-size:3rem;margin-bottom:11px">&#127881;</div>
+    <h2>Booking Confirmed!</h2>
+    <p style="color:var(--g4);line-height:1.7;margin-bottom:13px">Our team will call you within 24 hours to confirm your trip details.</p>
+    <div class="suc-id">Booking ID: <strong style="color:var(--yd)" id="booking-ref"></strong></div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <a href="dashboard.html" class="btn btn-y">View Dashboard</a>
+      <button onclick="document.getElementById('suc-modal').classList.remove('show')" class="btn btn-oy">Close</button>
+    </div>
+  </div>
+</div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",
+    projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",
+    messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

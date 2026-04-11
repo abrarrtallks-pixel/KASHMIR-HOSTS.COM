@@ -1,386 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sun Seekers Travels — Premium Travel Agency in Jammu & Kashmir. Explore Gulmarg, Pahalgam, Sonmarg, Srinagar and complete J&K tours. Book your dream Kashmir vacation today.">
-  <meta name="keywords" content="Kashmir tour packages, Gulmarg tour, Pahalgam tour, Sonmarg tour, Srinagar tour, J&K travel, Kashmir travel agency, Sun Seekers Travels">
-  <meta name="author" content="Sun Seekers Travels">
-  <meta property="og:title" content="Sun Seekers Travels — Paradise on Earth">
-  <meta property="og:description" content="Discover the magic of Kashmir with Sun Seekers Travels. Premium tour packages from Jammu & Kashmir.">
-  <meta property="og:type" content="website">
-  <title>Sun Seekers Travels — Paradise on Earth | Kashmir Tours</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀</text></svg>">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>KashmirHosts — Explore Kashmir with Comfort & Trust</title>
+  <meta name="description" content="Premium Kashmir tours & vehicles. Ladies Escape, Hidden Gems, Live Tracking. Founded by Gazanfar Khan."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-
-<!-- PAGE LOADER -->
-<div id="page-loader">
-  <div class="loader-logo">Sun <span>Seekers</span></div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-</div>
-
-<!-- TOAST -->
-<div id="toast-container" class="toast-container"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">☀</div>
-      <div class="nav-logo-text">
-        <span class="nav-logo-main">Sun Seekers</span>
-        <span class="nav-logo-sub">Travels</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="pages/about.html">About</a></li>
-      <li><a href="pages/gallery.html">Gallery</a></li>
-      <li><a href="pages/contact.html">Contact</a></li>
-      <li><a href="#packages" onclick="event.preventDefault(); document.getElementById('packages').scrollIntoView({behavior:'smooth'})" class="nav-cta">Book Tour</a></li>
-    </ul>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div><nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+  <ul class="nav-links"><li><a href="index.html" class="act">Home</a></li><li><a href="tours.html">Tours</a></li><li><a href="cars.html">Vehicles</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="nav-right">
+    <a href="book.html" class="nav-cart"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cart-badge"></span></a>
+    <div id="nav-user-area" style="display:flex;gap:7px;align-items:center">
+      <a href="login.html" class="nbtn nbtn-ghost">Login</a>
+      <a href="book.html" class="nbtn nbtn-y">Book Now</a>
+    </div>
+    <button class="hbg" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <canvas id="particles-canvas" class="hero-particles"></canvas>
-  
-  <div class="hero-content">
-    <div class="hero-badge">✈ Jammu & Kashmir, India</div>
-    <h1 class="hero-title">
-      Welcome to<br><span>Paradise on Earth</span>
-    </h1>
-    <div class="hero-typing">
-      <span id="typing-text"></span><span class="typing-cursor"></span>
+<div class="mob-menu" id="mob-menu">
+  <a href="index.html">&#127968; Home</a><a href="tours.html">&#127956;&#65039; Tours</a>
+  <a href="cars.html">&#128663; Vehicles</a><a href="about.html">&#8505;&#65039; About</a>
+  <a href="contact.html">&#128222; Contact</a><a href="book.html">&#128722; Cart</a><a href="login.html">&#128273; Login</a>
+</div>
+<section class="hero" id="hero">
+  <div class="hero-slides">
+    <div class="hs on" style="background-image:url('https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1800&q=80')"></div>
+    <div class="hs" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80')"></div>
+    <div class="hs" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1800&q=80')"></div>
+    <div class="hs" style="background-image:url('https://images.unsplash.com/photo-1569074187119-c87815b476da?w=1800&q=80')"></div>
+  </div>
+  <div class="h-ov"></div>
+  <div class="h-con">
+    <div class="h-tag fu"><i class="fas fa-mountain"></i> Hospitality that feels like family</div>
+    <h1 class="h-title fu d1">Explore Kashmir<br/>with <b>Comfort &amp; Trust</b></h1>
+    <p class="h-sub fu d2">Founded by Gazanfar Khan — a Kashmiri native who turned his love for his homeland into a mission to show you its true beauty, safely and authentically.</p>
+    <div class="h-btns fu d3">
+      <a href="#plan-section" class="btn btn-y btn-lg"><i class="fas fa-route"></i> Plan Your Trip</a>
+      <a href="tours.html" class="btn btn-ow btn-lg"><i class="fas fa-map-marked-alt"></i> View Packages</a>
     </div>
-    <p class="hero-description">
-      Embark on an extraordinary journey through the breathtaking valleys, snow-capped peaks, and serene lakes of Jammu & Kashmir with your most trusted travel partner.
-    </p>
-    <div class="hero-buttons">
-      <a href="#packages" onclick="event.preventDefault(); document.getElementById('packages').scrollIntoView({behavior:'smooth'})" class="btn btn-accent">Explore Packages ↓</a>
-      <a href="https://wa.me/916005868858" target="_blank" class="btn btn-outline">💬 WhatsApp Us</a>
+    <div class="h-stats fu d4">
+      <div class="hst"><strong>5000+</strong><span>Happy Travelers</span></div>
+      <div class="hst-d"></div>
+      <div class="hst"><strong>50+</strong><span>Tour Packages</span></div>
+      <div class="hst-d"></div>
+      <div class="hst"><strong>10+</strong><span>Years Experience</span></div>
+      <div class="hst-d"></div>
+      <div class="hst"><strong>4.9&#9733;</strong><span>Average Rating</span></div>
     </div>
   </div>
-  
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">5000+</div>
-      <div class="hero-stat-label">Happy Travelers</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">10+</div>
-      <div class="hero-stat-label">Years Experience</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">4.9★</div>
-      <div class="hero-stat-label">Rating</div>
-    </div>
-  </div>
-  
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    Scroll
-  </div>
+  <div id="h-dots" style="position:absolute;bottom:24px;right:5%;z-index:2;display:flex;gap:7px"></div>
 </section>
 
-<!-- FEATURES STRIP -->
-<section class="features-strip">
-  <div class="container">
-    <div class="features-grid">
-      <div class="feature-item reveal">
-        <div class="feature-icon">🛡️</div>
-        <div class="feature-title">100% Safe & Secure</div>
-        <div class="feature-text">All our tours are fully insured and safety-certified for your peace of mind</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-1">
-        <div class="feature-icon">💰</div>
-        <div class="feature-title">Best Price Guarantee</div>
-        <div class="feature-text">Competitive pricing with no hidden fees — transparent billing always</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-2">
-        <div class="feature-icon">🏨</div>
-        <div class="feature-title">Premium Stays</div>
-        <div class="feature-text">Carefully curated hotels, houseboats & luxury resorts across Kashmir</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-3">
-        <div class="feature-icon">🧭</div>
-        <div class="feature-title">Expert Local Guides</div>
-        <div class="feature-text">Experienced guides who know every hidden gem of Jammu & Kashmir</div>
-      </div>
-      <div class="feature-item reveal reveal-delay-4">
-        <div class="feature-icon">📱</div>
-        <div class="feature-title">24/7 Support</div>
-        <div class="feature-text">Round-the-clock assistance via WhatsApp, call, or email</div>
-      </div>
+<!-- SEARCH BAR -->
+<div class="search-wrap">
+  <div class="search-box">
+    <div class="s-tabs">
+      <button class="stab on" data-tab="tour">&#127956;&#65039; Tour Package</button>
+      <button class="stab" data-tab="vehicle">&#128663; Vehicle Rental</button>
     </div>
-  </div>
-</section>
-
-<!-- PACKAGES -->
-<section class="section packages-section" id="packages">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="section-label">Explore Kashmir</span>
-      <h2 class="section-title">Our Tour Packages</h2>
-      <p class="section-subtitle">Hand-crafted experiences to the most breathtaking destinations in Jammu & Kashmir</p>
+    <div class="s-fields" id="sf-tour" style="display:grid">
+      <div class="sf"><label><i class="fas fa-map-marker-alt"></i> Destination</label>
+        <select class="fc"><option>Select Destination</option><option>Srinagar</option><option>Pahalgam</option><option>Gulmarg</option><option>Sonamarg</option><option>Gurez Valley</option><option>Bangus Valley</option><option>Warwan Valley</option><option>Leh-Ladakh</option></select></div>
+      <div class="sf"><label><i class="fas fa-calendar"></i> Travel Date</label><input type="date" class="fc"/></div>
+      <div class="sf"><label><i class="fas fa-users"></i> Travellers</label>
+        <select class="fc"><option>1 Person</option><option selected>2 Persons</option><option>3-4 Persons</option><option>5-6 Persons</option><option>7+ Persons</option></select></div>
+      <button class="btn btn-y" onclick="location.href='tours.html'"><i class="fas fa-search"></i> Search Tours</button>
     </div>
-    <div class="packages-grid" id="packages-grid"></div>
-    <div class="text-center mt-4 reveal">
-      <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:16px">* All prices are per person and may vary based on season. Contact us for group discounts.</p>
-      <a href="pages/about.html" class="btn btn-primary">Learn More About Us →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT STRIP -->
-<section class="section" style="background: linear-gradient(135deg, #0a3d62 0%, #1a2e44 100%);">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="about-strip-grid">
-      <div class="reveal-left">
-        <span class="section-label" style="color:var(--accent)">About Us</span>
-        <h2 class="section-title" style="color:white">Your Kashmir<br>Dream Team</h2>
-        <p style="color:rgba(255,255,255,0.7);margin-bottom:24px;line-height:1.8;">
-          Based in the heart of Srinagar, Sun Seekers Travels has been crafting unforgettable journeys through Jammu & Kashmir for over a decade. We are not just a travel agency — we are your local friends who know every hidden valley, every pristine lake, and every breathtaking viewpoint.
-        </p>
-        <p style="color:rgba(255,255,255,0.7);margin-bottom:32px;line-height:1.8;">
-          From luxury houseboat experiences on Dal Lake to adrenaline-packed glacier treks, we design tours that match your dreams perfectly.
-        </p>
-        <a href="pages/about.html" class="btn btn-accent">Discover Our Story →</a>
-      </div>
-      <div class="reveal-right" style="position:relative;padding:20px;">
-        <img src="https://images.unsplash.com/photo-1564329494258-3f72215ba175?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80" alt="Dal Lake Kashmir" style="width:100%;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.4);">
-        <div style="position:absolute;bottom:0;right:0;background:linear-gradient(135deg,var(--accent-light),var(--accent));padding:20px 24px;border-radius:16px;text-align:center;box-shadow:0 12px 40px rgba(240,165,0,0.4);">
-          <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:#0d1b2a;line-height:1;">10+</div>
-          <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">Years Experience</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section testimonials">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="section-label">Traveler Stories</span>
-      <h2 class="section-title">What Our Guests Say</h2>
-      <p class="section-subtitle">Real experiences from thousands of happy travelers who explored Kashmir with us</p>
-    </div>
-    <div class="testimonials-slider reveal">
-      <div class="testimonials-track">
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"The Gulmarg tour was absolutely magical! The gondola ride had us speechless. Sun Seekers handled everything flawlessly — from transfers to the perfect hotel. Couldn't have asked for a better experience."</p>
-          <div class="testimonial-author">
-            <img src="https://i.pravatar.cc/100?img=1" alt="Priya Sharma" class="testimonial-avatar">
-            <div>
-              <div class="testimonial-name">Priya Sharma</div>
-              <div class="testimonial-location">📍 Delhi, India</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"We did the complete J&K tour and it was the best decision of our lives! 7 days of pure bliss. Our guide was incredibly knowledgeable and the houseboat on Dal Lake was a dream come true."</p>
-          <div class="testimonial-author">
-            <img src="https://i.pravatar.cc/100?img=15" alt="Rahul Mehta" class="testimonial-avatar">
-            <div>
-              <div class="testimonial-name">Rahul Mehta</div>
-              <div class="testimonial-location">📍 Mumbai, India</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Pahalgam took our breath away! Sun Seekers arranged the most perfect itinerary. Their prices are unbeatable and the service is five-star. Already planning our next Kashmir trip with them!"</p>
-          <div class="testimonial-author">
-            <img src="https://i.pravatar.cc/100?img=25" alt="Anjali Nair" class="testimonial-avatar">
-            <div>
-              <div class="testimonial-name">Anjali Nair</div>
-              <div class="testimonial-location">📍 Bangalore, India</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"As a solo traveler, I was hesitant, but Sun Seekers made me feel completely safe and welcomed. The Sonmarg glacier trek was epic and the photography opportunities were world-class!"</p>
-          <div class="testimonial-author">
-            <img src="https://i.pravatar.cc/100?img=32" alt="Arjun Kapoor" class="testimonial-avatar">
-            <div>
-              <div class="testimonial-name">Arjun Kapoor</div>
-              <div class="testimonial-location">📍 Pune, India</div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <div class="slider-controls">
-        <button class="slider-btn" onclick="sliderPrev()">←</button>
-        <div class="slider-dots">
-          <div class="slider-dot active" onclick="goTo(0)"></div>
-          <div class="slider-dot"></div>
-          <div class="slider-dot"></div>
-          <div class="slider-dot"></div>
-        </div>
-        <button class="slider-btn" onclick="sliderNext()">→</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section style="background:linear-gradient(135deg, var(--accent) 0%, #d4890a 100%);padding:80px 0;text-align:center;">
-  <div class="container">
-    <div class="reveal">
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--dark);margin-bottom:16px;">Ready to Explore Kashmir?</h2>
-      <p style="color:rgba(0,0,0,0.7);font-size:1.1rem;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;">Book your dream vacation today and get exclusive early-bird discounts. Limited slots available!</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <button onclick="openBookingModal('')" class="btn btn-primary" style="font-size:1rem;padding:16px 40px;">Book Now ✈</button>
-        <a href="https://wa.me/916005868858" target="_blank" class="btn btn-whatsapp" style="font-size:1rem;padding:16px 40px;">💬 WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">☀</div>
-          <div class="footer-logo-name">Sun Seekers Travels</div>
-        </div>
-        <p>Your most trusted travel partner for exploring the magical valleys, peaks and lakes of Jammu & Kashmir. Creating memories that last a lifetime since 2014.</p>
-        <div class="footer-social">
-          <a href="#" class="social-link">📘</a>
-          <a href="#" class="social-link">📸</a>
-          <a href="#" class="social-link">🐦</a>
-          <a href="https://wa.me/916005868858" target="_blank" class="social-link">💬</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="pages/about.html">About Us</a></li>
-          <li><a href="pages/gallery.html">Gallery</a></li>
-          <li><a href="pages/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Tour Packages</h4>
-        <ul>
-          <li><a href="#packages">Gulmarg Tour</a></li>
-          <li><a href="#packages">Pahalgam Tour</a></li>
-          <li><a href="#packages">Sonmarg Tour</a></li>
-          <li><a href="#packages">Srinagar Local</a></li>
-          <li><a href="#packages">Complete J&K</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Us</h4>
-        <ul>
-          <li><a href="tel:+917006567457">📞 +91 7006567457</a></li>
-          <li><a href="https://wa.me/917006567457" target="_blank">💬 WhatsApp</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#e390968d9086868886919097918295868f90d2a3848e828a8fcd808c8e">✉ Email Us</a></li>
-          <li><a href="pages/contact.html">📍 Srinagar, J&K</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 Sun Seekers Travels. All rights reserved. | Crafted with ❤ in Kashmir</p>
-      <p><a href="admin/login.html">Admin Panel</a></p>
-    </div>
-  </div>
-</footer>
-
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/917006567457?text=Hi%20Sun%20Seekers%20Travels!%20I'm%20interested%20in%20your%20Kashmir%20tour%20packages." target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
-
-<!-- BOOKING MODAL -->
-<div class="modal-overlay" id="booking-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title">Book Your Tour ✈</h2>
-      <p class="modal-subtitle">Fill the form and we'll confirm via WhatsApp</p>
-      <button class="modal-close" onclick="closeBookingModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <form class="booking-form" autocomplete="off">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input type="text" name="name" class="form-control" placeholder="Your full name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXXXXXXX" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" name="email" class="form-control" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Select Package *</label>
-          <select name="package" class="form-control" required>
-            <option value="">Select a Package</option>
-            <option>Gulmarg Tour</option>
-            <option>Pahalgam Tour</option>
-            <option>Sonmarg Tour</option>
-            <option>Srinagar Local Tour</option>
-            <option>Complete J&K Tour</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Number of Persons *</label>
-            <select name="persons" class="form-control" required>
-              <option value="">Select</option>
-              <option>1 Person</option>
-              <option>2 Persons</option>
-              <option>3 Persons</option>
-              <option>4 Persons</option>
-              <option>5-8 Persons</option>
-              <option>9+ Persons (Group)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Travel Date *</label>
-            <input type="date" name="date" class="form-control" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Additional Message</label>
-          <textarea name="message" class="form-control" rows="3" placeholder="Any special requirements, preferences or questions..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">
-          <span class="btn-text">💬 Send Booking via WhatsApp</span>
-          <div class="btn-loader"></div>
-        </button>
-      </form>
+    <div class="s-fields" id="sf-car" style="display:none">
+      <div class="sf"><label><i class="fas fa-car"></i> Vehicle</label>
+        <select class="fc"><option>Select Vehicle</option><option>Force Urbania (15 Seater)</option><option>Innova Hycross (7/8 Seater)</option><option>Innova Crysta (7 Seater)</option><option>Innova (7 Seater)</option><option>Maruti Eeco (6 Seater)</option><option>Honda Amaze (4 Seater)</option><option>Toyota Etios (4 Seater)</option></select></div>
+      <div class="sf"><label><i class="fas fa-calendar"></i> Pickup Date</label><input type="date" class="fc"/></div>
+      <div class="sf"><label><i class="fas fa-calendar-check"></i> Return Date</label><input type="date" class="fc"/></div>
+      <button class="btn btn-y" onclick="location.href='cars.html'"><i class="fas fa-search"></i> Check Availability</button>
     </div>
   </div>
 </div>
 
-<style>
-@media(max-width:768px){
-  .about-strip-grid{grid-template-columns:1fr!important;gap:40px!important}
-}
-</style>
+<!-- WHY CHOOSE US -->
+<section class="sec bg-g1"><div class="con">
+  <div class="tc" style="margin-bottom:42px">
+    <div class="stag fu"><i class="fas fa-award"></i> Why KashmirHosts?</div>
+    <h2 class="sh2 fu d1">Your Journey, <span>Our Priority</span></h2>
+    <p class="sdesc fu d2">Born from a Kashmiri's love for his homeland — we know every valley, every hidden path, and every safe route.</p>
+  </div>
+  <div class="g4">
+    <div class="feat fu d1"><div class="feat-ic"><i class="fas fa-user-shield"></i></div><h3>POSH-Trained Staff</h3><p>All drivers and guides trained in Prevention of Sexual Harassment. Trusted choice for ladies groups and solo female travelers.</p></div>
+    <div class="feat fu d2"><div class="feat-ic"><i class="fas fa-satellite"></i></div><h3>Live GPS Tracking</h3><p>Real-time vehicle tracking on all trips. Share your live location with family for complete peace of mind.</p></div>
+    <div class="feat fu d3"><div class="feat-ic"><i class="fas fa-globe"></i></div><h3>Secular &amp; Professional</h3><p>Diverse, professional staff treats every traveler with equal respect regardless of background or religion.</p></div>
+    <div class="feat fu d4"><div class="feat-ic"><i class="fas fa-tag"></i></div><h3>Transparent Pricing</h3><p>No hidden charges, no surprises. What you see is exactly what you pay. Always.</p></div>
+  </div>
+</div></section>
 
-<script src="js/main.js"></script>
+<!-- PLAN YOUR TRIP -->
+<section class="plan-section" id="plan-section"><div class="plan-inner con">
+  <div class="tc" style="margin-bottom:30px">
+    <div class="stag fu" style="background:rgba(212,230,0,.14);color:var(--y);border-color:rgba(212,230,0,.22)"><i class="fas fa-route"></i> Smart Trip Planner</div>
+    <h2 class="sh2 fu d1" style="color:#fff">Plan Your <span>Perfect Kashmir Trip</span></h2>
+    <p class="sdesc fu d2" style="color:rgba(255,255,255,.55);margin:0 auto">Choose your travel style and destinations — from Most Explored to Hidden Gems.</p>
+  </div>
+  <div class="plan-card">
+    <div class="plan-grid">
+      <div><div class="plan-lbl"><i class="fas fa-calendar"></i> Travel Date</div><input type="date" class="plan-fc" id="plan-date" onchange="updatePlanSummary()"/></div>
+      <div><div class="plan-lbl"><i class="fas fa-users"></i> Number of Travellers</div>
+        <select class="plan-fc" id="plan-travellers" onchange="updatePlanSummary()">
+          <option>1 Person</option><option selected>2 Persons</option><option>3-4 Persons</option>
+          <option>5-6 Persons</option><option>7-10 Persons</option><option>10-15 Persons</option><option>15+ Persons</option>
+        </select></div>
+      <div><div class="plan-lbl"><i class="fas fa-compass"></i> Trip Style</div>
+        <select class="plan-fc" id="plan-style" onchange="updatePlanSummary()">
+          <option>Select trip style</option><option>Adventure</option><option>Relaxation</option>
+          <option>Spiritual / Pilgrimage</option><option>Photography</option><option>Wildlife &amp; Nature</option>
+        </select></div>
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="plan-lbl" style="margin-bottom:10px"><i class="fas fa-suitcase"></i> &#127952; Tour Type / Package</div>
+      <div class="type-pills" id="type-pills"></div>
+    </div>
+    <div>
+      <div class="plan-lbl" style="margin-bottom:10px"><i class="fas fa-map-marker-alt"></i> &#128205; Choose Destinations</div>
+      <div class="dest-tabs" id="dest-tabs"></div>
+      <div class="dest-list" id="dest-list"></div>
+    </div>
+    <div class="plan-summary" id="plan-summary"><h4>&#128506;&#65039; Your Trip Summary</h4><div class="plan-tags" id="plan-tags"></div></div>
+    <div style="display:flex;gap:11px;flex-wrap:wrap;margin-top:18px">
+      <button class="btn btn-y btn-lg" onclick="planNow()"><i class="fas fa-paper-plane"></i> Plan This Trip</button>
+      <a href="contact.html" class="btn btn-ow btn-lg"><i class="fas fa-headset"></i> Talk to Expert</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- FEATURED TOURS -->
+<section class="sec"><div class="con">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:32px">
+    <div><div class="stag fll"><i class="fas fa-compass"></i> Featured Tours</div><h2 class="sh2 fll d1">Handpicked <span>Kashmir Packages</span></h2></div>
+    <a href="tours.html" class="btn btn-oy fr">View All Tours <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="g3" id="feat-tours"></div>
+</div></section>
+
+<!-- LADIES BANNER -->
+<section class="sec bg-pk-pale"><div class="con">
+  <div class="ladies-banner fu">
+    <div>
+      <div class="stag stag-pk" style="display:inline-flex;margin-bottom:11px"><i class="fas fa-female"></i> Exclusively for Women</div>
+      <h2>&#127800; Ladies Escape — Kashmir</h2>
+      <p>A specially designed tour for groups of women. POSH-trained drivers, female guide available, live GPS tracking, and a 24/7 dedicated support line. Because your safety is our first priority.</p>
+      <div class="lbfeats">
+        <div class="lbf"><i class="fas fa-user-shield"></i><span>POSH-Trained Drivers</span></div>
+        <div class="lbf"><i class="fas fa-satellite"></i><span>Live GPS Tracking</span></div>
+        <div class="lbf"><i class="fas fa-female"></i><span>Female Guide Available</span></div>
+        <div class="lbf"><i class="fas fa-phone"></i><span>24/7 Dedicated Support</span></div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:11px;flex-wrap:wrap">
+        <a href="tours.html" class="btn btn-w" style="color:var(--pkd)"><i class="fas fa-map-marked-alt"></i> View Ladies Tours</a>
+        <a href="https://wa.me/919876543210" class="btn btn-opk" target="_blank"><i class="fab fa-whatsapp"></i> Chat with Us</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- VEHICLES -->
+<section class="sec bg-cream"><div class="con">
+  <div class="tc" style="margin-bottom:32px">
+    <div class="stag fu"><i class="fas fa-car"></i> Our Fleet</div>
+    <h2 class="sh2 fu d1">Comfortable <span>Vehicles</span> for Every Group</h2>
+    <p class="sdesc fu d2">From sedans to Force Urbania 15-seater — perfect for every group size.</p>
+  </div>
+  <div class="g3" id="feat-vehicles"></div>
+  <div class="tc" style="margin-top:28px"><a href="cars.html" class="btn btn-c btn-lg fu"><i class="fas fa-car-side"></i> View All Vehicles</a></div>
+</div></section>
+
+<!-- DESTINATIONS -->
+<section class="sec bg-dark"><div class="con">
+  <div class="tc" style="margin-bottom:32px">
+    <div class="stag fu" style="background:rgba(212,230,0,.14);color:var(--y);border-color:rgba(212,230,0,.2)"><i class="fas fa-mountain"></i> Top Destinations</div>
+    <h2 class="sh2 fu d1" style="color:#fff">Iconic <span>Kashmir</span> Destinations</h2>
+    <p class="sdesc fu d2" style="color:rgba(255,255,255,.5);margin:0 auto">From famous valleys to completely untouched hidden gems.</p>
+  </div>
+  <div class="dest-grid">
+    <div class="dc dc-lg fll" style="background-image:url('https://images.unsplash.com/photo-1569074187119-c87815b476da?w=900&q=80')"><div class="dc-ov"></div><div class="dc-info"><h3>Pahalgam</h3><p>Valley of Shepherds</p></div><div class="dc-tag"><span class="bdg bdg-y">&#128293; Most Popular</span></div></div>
+    <div class="dc fu" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80')"><div class="dc-ov"></div><div class="dc-info"><h3>Gulmarg</h3><p>Meadow of Flowers</p></div></div>
+    <div class="dc fu d1" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=700&q=80')"><div class="dc-ov"></div><div class="dc-info"><h3>Dal Lake</h3><p>Jewel of Kashmir</p></div></div>
+    <div class="dc fr" style="background-image:url('https://images.unsplash.com/photo-1591084728795-1149f32d9866?w=700&q=80')"><div class="dc-ov"></div><div class="dc-info"><h3>Sonamarg</h3><p>Meadow of Gold</p></div><div class="dc-tag"><span class="bdg" style="background:var(--green);color:#fff">&#128142; Hidden Gem</span></div></div>
+  </div>
+  <div style="text-align:center;margin-top:20px"><a href="tours.html" class="btn btn-oy"><i class="fas fa-gem"></i> Discover Hidden Gems</a></div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section class="sec bg-g1"><div class="con">
+  <div class="tc" style="margin-bottom:38px">
+    <div class="stag fu"><i class="fas fa-route"></i> How It Works</div>
+    <h2 class="sh2 fu d1">Book Your <span>Kashmir Trip</span> in 3 Steps</h2>
+  </div>
+  <div class="steps">
+    <div class="step fu d1"><div class="step-n">01</div><div class="step-ic"><i class="fas fa-search"></i></div><h3>Choose Package</h3><p>Browse tours and vehicles. Use the Trip Planner to discover Most Explored, Less Explored, or Hidden Gem destinations.</p></div>
+    <div class="step-arr fu d2"><i class="fas fa-chevron-right"></i></div>
+    <div class="step fu d2"><div class="step-n">02</div><div class="step-ic"><i class="fas fa-user-check"></i></div><h3>Sign In &amp; Book</h3><p>Create a free account or sign in with Google. Add travel details and checkout securely.</p></div>
+    <div class="step-arr fu d3"><i class="fas fa-chevron-right"></i></div>
+    <div class="step fu d3"><div class="step-n">03</div><div class="step-ic"><i class="fas fa-plane-departure"></i></div><h3>Pack &amp; Explore!</h3><p>Our team contacts you to confirm every detail. Just arrive — we handle everything else.</p></div>
+  </div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section class="sec"><div class="con">
+  <div class="tc" style="margin-bottom:32px">
+    <div class="stag fu"><i class="fas fa-star"></i> Testimonials</div>
+    <h2 class="sh2 fu d1">What Our <span>Travelers Say</span></h2>
+  </div>
+  <div class="testi-wrap">
+    <div class="testi-track" id="testi-track"></div>
+    <button class="sl-btn prev" id="t-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="sl-btn next" id="t-next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="sl-dots" id="testi-dots"></div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-bg" style="background-image:url('https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1600&q=80')"></div>
+  <div class="cta-ov"></div>
+  <div class="cta-con fu">
+    <h2>Ready to Explore <b>Heaven on Earth?</b></h2>
+    <p>Limited spots for the upcoming season. Experience Kashmir safely and authentically.</p>
+    <div style="display:flex;gap:11px;flex-wrap:wrap;justify-content:center;margin-top:20px">
+      <a href="tours.html" class="btn btn-y btn-lg"><i class="fas fa-map-marked-alt"></i> Explore Packages</a>
+      <a href="contact.html" class="btn btn-ow btn-lg"><i class="fas fa-phone"></i> Talk to Gazanfar</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="ft">
+    <div class="ft-brand"><a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+      <p>Founded by Gazanfar Khan in 2015. "Hospitality that feels like family."</p>
+      <div class="ft-soc"><a href="#" class="sb"><i class="fab fa-facebook-f"></i></a><a href="#" class="sb"><i class="fab fa-instagram"></i></a><a href="#" class="sb"><i class="fab fa-youtube"></i></a><a href="https://wa.me/919876543210" class="sb"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="ft-col"><h4>Quick Links</h4><ul class="ft-links">
+      <li><a href="tours.html"><i class="fas fa-chevron-right"></i>Tour Packages</a></li>
+      <li><a href="cars.html"><i class="fas fa-chevron-right"></i>Our Vehicles</a></li>
+      <li><a href="about.html"><i class="fas fa-chevron-right"></i>About Us</a></li>
+      <li><a href="contact.html"><i class="fas fa-chevron-right"></i>Contact</a></li>
+      <li><a href="privacy.html"><i class="fas fa-chevron-right"></i>Privacy Policy</a></li>
+    </ul></div>
+    <div class="ft-col"><h4>Destinations</h4><ul class="ft-links">
+      <li><a href="tours.html"><i class="fas fa-mountain"></i>Pahalgam</a></li>
+      <li><a href="tours.html"><i class="fas fa-snowflake"></i>Gulmarg</a></li>
+      <li><a href="tours.html"><i class="fas fa-water"></i>Dal Lake</a></li>
+      <li><a href="tours.html"><i class="fas fa-gem"></i>Gurez Valley</a></li>
+      <li><a href="tours.html"><i class="fas fa-gem"></i>Bangus Valley</a></li>
+    </ul></div>
+    <div class="ft-col"><h4>Contact Us</h4>
+      <div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Pahalgam, Anantnag, Kashmir J&amp;K 192125</span></div>
+      <div class="ft-ci"><i class="fas fa-map-marker-alt"></i><span>Shaikpet, Hyderabad, Telangana 500008</span></div>
+      <div class="ft-ci"><i class="fas fa-phone"></i><span>+91 98765 43210</span></div>
+      <div class="ft-ci"><i class="fas fa-envelope"></i><span>info@kashmirhosts.com</span></div>
+    </div>
+  </div>
+  <div class="fb">
+    <span>&#169; 2025 KashmirHosts. Founder &amp; CEO: <strong style="color:var(--y)">Gazanfar Khan</strong></span>
+    <span><a href="privacy.html">Privacy Policy</a> | <a href="https://kashmirhosts.com">kashmirhosts.com</a></span>
+  </div>
+</footer>
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<div id="toasts"></div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",
+    projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",
+    messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

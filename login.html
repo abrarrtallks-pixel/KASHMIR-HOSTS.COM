@@ -1,116 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Admin Login | Sun Seekers Travels</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀</text></svg>">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Sign In — KashmirHosts</title>
+  <meta name="description" content="Login to manage your Kashmir tour bookings."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-<div id="toast-container" class="toast-container"></div>
-
-<div class="admin-login">
-  <div class="admin-login-card">
-    <div class="admin-login-logo">
-      <div class="admin-login-logo-icon">☀</div>
-      <h1 class="admin-login-title">Admin Panel</h1>
-      <p class="admin-login-sub">Sun Seekers Travels — Secure Login</p>
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div><div id="toasts"></div>
+<div class="auth-wrap">
+  <div class="auth-l">
+    <div class="auth-l-bg" style="background-image:url('https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=900&q=80')"></div>
+    <div class="auth-l-con">
+      <a href="index.html" class="nav-logo" style="font-size:1.6rem;margin-bottom:20px;display:block">Kashmir<b>Hosts</b></a>
+      <h2>Welcome Back,<br/>Explorer! &#127956;&#65039;</h2>
+      <p>Sign in to access bookings, track your trips, and enjoy exclusive member discounts.</p>
+      <div class="a-feat"><i class="fas fa-calendar-check"></i><span>View and manage all bookings</span></div>
+      <div class="a-feat"><i class="fas fa-satellite"></i><span>Live vehicle tracking</span></div>
+      <div class="a-feat"><i class="fas fa-tag"></i><span>Exclusive 2% member discount</span></div>
+      <div class="a-feat"><i class="fas fa-headset"></i><span>Priority 24/7 support</span></div>
     </div>
-
-    <div class="admin-login-error" id="login-error">
-      ❌ Invalid credentials. Please try again.
-    </div>
-
-    <form id="login-form">
-      <div class="admin-form-group">
-        <label class="admin-form-label">Username</label>
-        <input type="text" id="login-user" class="admin-form-control" placeholder="Enter username" autocomplete="username" required>
-      </div>
-      <div class="admin-form-group">
-        <label class="admin-form-label">Password</label>
-        <div style="position:relative;">
-          <input type="password" id="login-pass" class="admin-form-control" placeholder="Enter password" autocomplete="current-password" required style="padding-right:48px;">
-          <button type="button" id="toggle-pass" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:1rem;">👁</button>
-        </div>
-      </div>
-      <button type="submit" id="login-btn" class="admin-btn admin-btn-accent" style="width:100%;padding:14px;font-size:0.95rem;border-radius:10px;margin-top:8px;">
-        <span id="login-btn-text">🔓 Login to Admin Panel</span>
-        <span id="login-btn-loader" style="display:none;">Verifying...</span>
+  </div>
+  <div class="auth-r">
+    <div class="a-form">
+      <h2>Sign In</h2>
+      <p>No account? <a href="signup.html">Create one free</a></p>
+      <button class="g-btn" onclick="handleGoogle()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google"/> Continue with Google
       </button>
-    </form>
-
-    <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);">
-      <p style="color:rgba(255,255,255,0.25);font-size:0.75rem;text-align:center;">
-        Username: <strong style="color:rgba(255,255,255,0.5)">admin</strong> &nbsp;·&nbsp; Password: <strong style="color:rgba(255,255,255,0.5)">SunSeekersAdmin@2024</strong><br>
-        <a href="../index.html" style="color:rgba(255,255,255,0.25);text-decoration:none;margin-top:6px;display:inline-block;">← Back to Website</a>
-      </p>
+      <div class="a-div"><span>or sign in with email</span></div>
+      <div id="l-err" class="alert al-e" style="display:none"></div>
+      <form onsubmit="handleLogin(event)">
+        <div class="fg"><label class="flbl">Email Address</label>
+          <div class="iw"><i class="fas fa-envelope ii"></i><input type="email" id="l-email" class="fc" placeholder="you@example.com" required/></div></div>
+        <div class="fg">
+          <label class="flbl" style="display:flex;justify-content:space-between">Password
+            <a href="#" style="color:var(--yd);font-weight:400;font-size:.77rem" onclick="toast('Contact info@kashmirhosts.com to reset password','info');return false">Forgot?</a>
+          </label>
+          <div class="iw"><i class="fas fa-lock ii"></i><input type="password" id="l-pass" class="fc" placeholder="Your password" required/>
+            <button type="button" class="eye" onclick="togglePw('l-pass',this)"><i class="fas fa-eye"></i></button></div>
+        </div>
+        <button type="submit" id="l-btn" class="btn btn-y btn-bl"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+      <div class="a-foot">
+        <p>New here? <a href="signup.html">Create free account</a></p>
+        <p><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a></p>
+      </div>
     </div>
   </div>
 </div>
-
-<script>
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if (e.key==='F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key))) e.preventDefault();
-});
-
-// ── YOUR APPS SCRIPT URL — PRE-FILLED ─────────────────────────
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWEl6ywIhI5ZXK64ywhax3S6rzlh99wQmD9EhwfzYGrLBe_mItt-Wt3V08A--6hNg/exec';
-
-document.getElementById('toggle-pass').addEventListener('click', function() {
-  const i = document.getElementById('login-pass');
-  i.type = i.type === 'password' ? 'text' : 'password';
-});
-
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const username = document.getElementById('login-user').value.trim();
-  const password = document.getElementById('login-pass').value;
-  const btn      = document.getElementById('login-btn');
-  const btnText  = document.getElementById('login-btn-text');
-  const btnLoad  = document.getElementById('login-btn-loader');
-  const errEl    = document.getElementById('login-error');
-
-  btn.disabled = true;
-  btnText.style.display = 'none';
-  btnLoad.style.display = 'inline';
-  errEl.classList.remove('show');
-
-  let ok = false;
-
-  // 1. Try Apps Script login
-  try {
-    const res  = await fetch(`${APPS_SCRIPT_URL}?action=login&user=${encodeURIComponent(username)}&pass=${encodeURIComponent(password)}`);
-    const data = await res.json();
-    if (data.success) {
-      sessionStorage.setItem('sst_admin', JSON.stringify({ user: username, token: data.token, time: Date.now() }));
-      ok = true;
-    }
-  } catch(err) {
-    console.log('Apps Script unreachable, trying local fallback');
-  }
-
-  // 2. Local fallback (same credentials as Code.gs)
-  if (!ok) {
-    await new Promise(r => setTimeout(r, 600));
-    if (username === 'admin' && password === 'SunSeekersAdmin@2024') {
-      sessionStorage.setItem('sst_admin', JSON.stringify({ user: username, token: 'local_' + Date.now(), time: Date.now() }));
-      ok = true;
-    }
-  }
-
-  if (ok) {
-    window.location.href = 'dashboard.html';
-    return;
-  }
-
-  errEl.classList.add('show');
-  btn.disabled = false;
-  btnText.style.display = 'inline';
-  btnLoad.style.display = 'none';
-});
-</script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",
+    projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",
+    messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"
+  });
+  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

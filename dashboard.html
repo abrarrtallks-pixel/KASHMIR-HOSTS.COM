@@ -1,890 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Dashboard | Sun Seekers Travels Admin</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀</text></svg>">
- <link rel="stylesheet" href="css/style.css">
-  <style>
-    .admin-gallery-item{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:rgba(255,255,255,0.05);}
-    .admin-gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-    .admin-gallery-item-actions{position:absolute;top:6px;right:6px;opacity:0;transition:opacity .2s;z-index:2;}
-    .admin-gallery-item:hover .admin-gallery-item-actions{opacity:1;}
-    .admin-gallery-item-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.82));padding:20px 8px 6px;font-size:.72rem;color:rgba(255,255,255,.85);z-index:2;}
-    #drop-zone{border:2px dashed rgba(240,165,0,.45);border-radius:16px;padding:44px 20px;text-align:center;cursor:pointer;background:rgba(240,165,0,.03);transition:all .2s;}
-    #drop-zone.drag{border-color:var(--accent);background:rgba(240,165,0,.08);}
-    .prog-wrap{background:rgba(255,255,255,.08);border-radius:8px;height:8px;overflow:hidden;margin-top:10px;}
-    .prog-bar{height:100%;background:var(--accent);transition:width .3s;border-radius:8px;}
-    .qtile{border-radius:10px;overflow:hidden;background:rgba(255,255,255,.05);position:relative;}
-    .qtile img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
-    /* image picker modal */
-    .picker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px;}
-    .picker-box{background:#1a1a2e;border:1px solid rgba(255,255,255,.1);border-radius:18px;width:100%;max-width:740px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;}
-    .picker-head{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
-    .picker-body{padding:16px 20px 20px;overflow-y:auto;flex:1;}
-    .ptabs{display:flex;gap:6px;padding:12px 20px 0;flex-shrink:0;}
-    .ptab{padding:8px 16px;border:none;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s;}
-    .ptab.on{background:var(--accent);color:#1a0a00;}
-    .ptab:not(.on){background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);}
-    .ptile{border-radius:10px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:rgba(255,255,255,.05);transition:border-color .15s;}
-    .ptile:hover{border-color:rgba(240,165,0,.5);}
-    .ptile.sel{border-color:var(--accent);}
-    .ptile img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
-    .ptile-name{font-size:.68rem;color:rgba(255,255,255,.4);padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;}
-    /* tab strip */
-    .tab-strip{display:flex;gap:6px;background:rgba(0,0,0,.3);border-radius:12px;padding:5px;margin-bottom:18px;}
-    .tsbtn{flex:1;padding:10px 6px;border:none;border-radius:9px;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s;}
-    .tsbtn.on{background:var(--accent);color:#1a0a00;}
-    .tsbtn:not(.on){background:transparent;color:rgba(255,255,255,.45);}
-  </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>My Dashboard — KashmirHosts</title>
+  <meta name="description" content="Manage your Kashmir tour bookings and profile."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
-<body class="admin-body">
-<div id="toast-container" class="toast-container"></div>
+<body class="db">
+<div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div>
 
-<!-- SIDEBAR -->
-<aside class="admin-sidebar" id="admin-sidebar">
-  <div class="admin-sidebar-header">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--accent-light),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">☀</div>
-      <div><div class="admin-sidebar-logo">Sun Seekers</div><div class="admin-sidebar-sub">Admin Panel</div></div>
-    </div>
-  </div>
-  <nav class="admin-sidebar-nav">
-    <div class="admin-nav-label">Main</div>
-    <button class="admin-nav-link active" data-panel="dashboard"><span class="admin-nav-icon">📊</span> Dashboard</button>
-    <button class="admin-nav-link" data-panel="packages"><span class="admin-nav-icon">🏔️</span> Tour Packages</button>
-    <button class="admin-nav-link" data-panel="gallery"><span class="admin-nav-icon">🖼️</span> Gallery</button>
-    <div class="admin-nav-label" style="margin-top:16px;">Account</div>
-    <button class="admin-nav-link" data-panel="settings"><span class="admin-nav-icon">⚙️</span> Settings</button>
-    <button class="admin-nav-link" onclick="window.open('../index.html','_blank')"><span class="admin-nav-icon">🌐</span> View Website</button>
-    <button class="admin-nav-link" onclick="adminLogout()"><span class="admin-nav-icon">🚪</span> Logout</button>
-  </nav>
-</aside>
-
-<!-- MAIN -->
-<main class="admin-main">
-  <div class="admin-topbar">
-    <div style="display:flex;align-items:center;gap:16px;">
-      <button id="sidebar-toggle" style="display:none;background:none;border:none;color:white;font-size:1.3rem;cursor:pointer;">☰</button>
-      <h2 class="admin-topbar-title" id="panel-title">Dashboard</h2>
-    </div>
-    <div class="admin-topbar-user">
-      <span id="admin-username">Admin</span>
-      <div class="admin-avatar" id="admin-avatar">A</div>
-    </div>
-  </div>
-
-  <div class="admin-content">
-
-    <!-- ════════════════ DASHBOARD ════════════════ -->
-    <div class="admin-panel active" id="panel-dashboard">
-      <div id="conn-banner" style="padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;background:rgba(255,170,0,.1);border:1px solid rgba(255,170,0,.25);color:rgba(255,200,80,.9);">
-        🔄 Connecting to Apps Script...
-      </div>
-      <div class="admin-stat-grid">
-        <div class="admin-stat-card"><div class="admin-stat-num" id="stat-packages">—</div><div class="admin-stat-label">Tour Packages</div></div>
-        <div class="admin-stat-card"><div class="admin-stat-num" id="stat-gallery">—</div><div class="admin-stat-label">Gallery Images</div></div>
-        <div class="admin-stat-card"><div class="admin-stat-num">5000+</div><div class="admin-stat-label">Total Travelers</div></div>
-        <div class="admin-stat-card"><div class="admin-stat-num">4.9★</div><div class="admin-stat-label">Avg Rating</div></div>
-      </div>
-      <div class="admin-card">
-        <div class="admin-card-header"><span class="admin-card-title">🚀 Quick Actions</span></div>
-        <div class="admin-card-body">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
-            <button class="admin-btn admin-btn-accent" onclick="switchPanel('packages')" style="padding:16px;text-align:left;border-radius:12px;">➕ Add New Package</button>
-            <button class="admin-btn admin-btn-primary" onclick="switchPanel('gallery')" style="padding:16px;text-align:left;border-radius:12px;">📸 Upload to Gallery</button>
-            <a href="../index.html" target="_blank" class="admin-btn admin-btn-primary" style="padding:16px;text-align:left;border-radius:12px;display:block;text-decoration:none;color:white;">🌐 View Live Website</a>
-            <a href="https://wa.me/916005868858" target="_blank" class="admin-btn" style="padding:16px;text-align:left;border-radius:12px;background:rgba(37,211,102,.15);color:#2ea564;border:1px solid rgba(37,211,102,.3);">💬 WhatsApp Bookings</a>
-          </div>
-        </div>
-      </div>
-      <div class="admin-card">
-        <div class="admin-card-header"><span class="admin-card-title">📦 Recent Packages</span><button class="admin-btn admin-btn-accent admin-btn-sm" onclick="switchPanel('packages')">Manage All</button></div>
-        <div class="admin-card-body" style="padding:0;">
-          <table class="admin-table"><thead><tr><th>Package</th><th>Duration</th><th>Price</th><th>Status</th></tr></thead>
-          <tbody id="dash-pkg-tbody"><tr><td colspan="4" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading...</td></tr></tbody></table>
-        </div>
-      </div>
+<div class="dw">
+  <aside class="dsb" id="dsb">
+    <div class="dsb-brand"><a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a><small>My Account</small></div>
+    <div class="dsb-user"><div class="dsb-av" id="dsb-av">U</div><div><div class="dsb-name" id="dsb-name">Loading...</div><div class="dsb-role">Traveler</div></div></div>
+    <nav class="dsb-nav">
+      <button class="dn on" data-tab="overview"><i class="fas fa-th-large"></i> Dashboard</button>
+      <button class="dn" data-tab="bookings"><i class="fas fa-calendar-check"></i> My Bookings</button>
+      <button class="dn" data-tab="profile"><i class="fas fa-user-edit"></i> My Profile</button>
+      <a href="tours.html" class="dn"><i class="fas fa-map-marked-alt"></i> Browse Tours</a>
+      <a href="cars.html" class="dn"><i class="fas fa-car"></i> Rent Vehicle</a>
+      <a href="contact.html" class="dn"><i class="fas fa-headset"></i> Support</a>
+      <div class="dsb-div"></div>
+      <button class="dn lo" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </nav>
+    <div class="dsb-foot"><a href="https://wa.me/919876543210" style="color:rgba(255,255,255,.38);font-size:.76rem"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Support</a></div>
+  </aside>
+  <main class="dm">
+    <div class="dtop">
+      <button class="sb-tog" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+      <div class="dtop-ti" id="dtop-ti">Dashboard</div>
+      <div class="dtop-acts"><a href="book.html" class="btn btn-y btn-sm"><i class="fas fa-plus"></i> New Booking</a></div>
     </div>
 
-    <!-- ════════════════ PACKAGES ════════════════ -->
-    <div class="admin-panel" id="panel-packages">
-
-      <!-- ADD / EDIT FORM -->
-      <div class="admin-card" id="pkg-form-card">
-        <div class="admin-card-header">
-          <span class="admin-card-title" id="pkg-form-title">➕ Add New Package</span>
-          <button class="admin-btn admin-btn-sm" onclick="resetPkgForm()" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);">↺ Reset</button>
-        </div>
-        <div class="admin-card-body">
-          <form id="pkg-form">
-            <input type="hidden" id="pkg-id">
-            <div class="admin-form-row">
-              <div class="admin-form-group">
-                <label class="admin-form-label">Package Name *</label>
-                <input type="text" id="pkg-name" class="admin-form-control" placeholder="e.g. Gulmarg Tour" required>
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-form-label">Price (₹ per person) *</label>
-                <input type="number" id="pkg-price" class="admin-form-control" placeholder="e.g. 4999" required min="0">
-              </div>
-            </div>
-            <div class="admin-form-row">
-              <div class="admin-form-group">
-                <label class="admin-form-label">Duration</label>
-                <input type="text" id="pkg-duration" class="admin-form-control" placeholder="e.g. 2 Days / 1 Night">
-              </div>
-              <div class="admin-form-group">
-                <label class="admin-form-label">Badge</label>
-                <input type="text" id="pkg-badge" class="admin-form-control" placeholder="e.g. Popular, Trending">
-              </div>
-            </div>
-
-            <!-- IMAGE FIELD with gallery picker -->
-            <div class="admin-form-group">
-              <label class="admin-form-label">Package Image</label>
-              <div style="display:flex;gap:12px;align-items:flex-start;">
-                <div id="pkg-img-thumb" onclick="openPicker()" title="Click to pick from gallery"
-                  style="width:80px;height:60px;border-radius:8px;background:rgba(255,255,255,.06);border:2px dashed rgba(255,255,255,.15);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);font-size:.7rem;cursor:pointer;">🖼️</div>
-                <div style="flex:1;">
-                  <input type="url" id="pkg-image" class="admin-form-control" placeholder="Paste URL — or click thumbnail / Browse Gallery button" oninput="syncPkgThumb()">
-                  <button type="button" onclick="openPicker()" class="admin-btn admin-btn-sm" style="margin-top:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);font-size:.78rem;">🖼️ Browse Gallery to Pick Image</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="admin-form-group">
-              <label class="admin-form-label">Description</label>
-              <textarea id="pkg-desc" class="admin-form-control" rows="3" placeholder="Short description of the tour package..."></textarea>
-            </div>
-            <div style="display:flex;gap:12px;">
-              <button type="submit" class="admin-btn admin-btn-accent" style="padding:12px 28px;">
-                <span id="pkg-save-text">➕ Add Package</span>
-                <span id="pkg-save-loader" style="display:none;">Saving...</span>
-              </button>
-              <button type="button" onclick="resetPkgForm()" class="admin-btn" style="padding:12px 24px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);">Cancel</button>
-            </div>
-          </form>
-        </div>
+    <!-- OVERVIEW TAB -->
+    <div class="dtab on" id="tab-overview">
+      <div class="dash-welcome">
+        <div><h1>Welcome back, <span id="dw-name">Traveler</span>! 👋</h1><p>Here is your Kashmir journey overview.</p></div>
+        <a href="tours.html" class="btn btn-y btn-sm"><i class="fas fa-map-marked-alt"></i> Explore Tours</a>
       </div>
-
-      <!-- PACKAGES TABLE -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <span class="admin-card-title">📦 All Packages</span>
-          <span id="pkg-count" style="color:var(--accent);font-size:.85rem;"></span>
-        </div>
-        <div class="admin-card-body" style="padding:0;">
-          <table class="admin-table">
-            <thead><tr><th>Package</th><th>Duration</th><th>Price</th><th>Badge</th><th>Actions</th></tr></thead>
-            <tbody id="pkg-tbody"><tr><td colspan="5" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading...</td></tr></tbody>
-          </table>
-        </div>
+      <div class="stats-grid">
+        <div class="sc fu"><div class="sc-ic sci-y"><i class="fas fa-calendar-check"></i></div><div class="sc-v" id="st-total">0</div><div class="sc-l">Total Bookings</div></div>
+        <div class="sc fu d1"><div class="sc-ic sci-g"><i class="fas fa-check-circle"></i></div><div class="sc-v" id="st-conf">0</div><div class="sc-l">Confirmed</div></div>
+        <div class="sc fu d2"><div class="sc-ic sci-pk"><i class="fas fa-rupee-sign"></i></div><div class="sc-v" id="st-spent">&#8377;0</div><div class="sc-l">Total Spent</div></div>
+        <div class="sc fu d3"><div class="sc-ic sci-o"><i class="fas fa-mountain"></i></div><div class="sc-v" id="st-trips">0</div><div class="sc-l">Trips Taken</div></div>
       </div>
-    </div>
-
-    <!-- ════════════════ GALLERY ════════════════ -->
-    <div class="admin-panel" id="panel-gallery">
-      <div id="gal-banner" style="display:none;padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;"></div>
-
-      <!-- UPLOAD CARD -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <span class="admin-card-title">📤 Upload Images</span>
-          <a id="drive-link" href="https://drive.google.com/drive/folders/1dQNdXi1ugtPZTp9mWkSN0MT8COWO5fKW" target="_blank"
-            style="font-size:.75rem;padding:4px 12px;background:rgba(66,133,244,.15);color:#6ea8ff;border-radius:20px;border:1px solid rgba(66,133,244,.3);text-decoration:none;">
-            📁 Open Drive Folder
-          </a>
+      <div class="g2" style="margin-top:18px">
+        <div class="dk">
+          <div class="dk-hd"><h3><i class="fas fa-history"></i> Recent Bookings</h3><a href="#" onclick="switchDTab('bookings');return false">View All</a></div>
+          <div id="recent-bks"></div>
         </div>
-        <div class="admin-card-body">
-          <!-- method tabs -->
-          <div class="tab-strip">
-            <button class="tsbtn on" data-ts="ts-device">📱 From Device</button>
-            <button class="tsbtn" data-ts="ts-url">🔗 Paste URL</button>
-            <button class="tsbtn" data-ts="ts-folder">📁 Browse Drive Folder</button>
-          </div>
-
-          <!-- TAB: DEVICE -->
-          <div class="ts-panel" id="ts-device">
-            <div id="drop-zone"
-              ondragover="event.preventDefault();this.classList.add('drag')"
-              ondragleave="this.classList.remove('drag')"
-              ondrop="onDrop(event)"
-              onclick="document.getElementById('file-inp').click()">
-              <div style="font-size:2.8rem;margin-bottom:10px;pointer-events:none;">📸</div>
-              <p style="color:rgba(255,255,255,.7);font-weight:600;margin:0 0 4px;pointer-events:none;">Tap to choose photos</p>
-              <p style="color:rgba(255,255,255,.3);font-size:.8rem;margin:0;pointer-events:none;">or drag & drop · JPG PNG WebP · max 10MB · select multiple</p>
-              <input type="file" id="file-inp" accept="image/*" multiple style="display:none;" onchange="onFilePick(this.files)">
-            </div>
-
-            <div id="q-wrap" style="display:none;margin-top:18px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                <span id="q-count" style="color:rgba(255,255,255,.5);font-size:.85rem;"></span>
-                <div style="display:flex;gap:8px;">
-                  <button onclick="clearQ()" class="admin-btn admin-btn-sm" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);">✕ Clear</button>
-                  <button onclick="uploadAll()" id="up-btn" class="admin-btn admin-btn-accent admin-btn-sm" style="font-weight:700;">
-                    <span id="up-btn-txt">☁️ Upload All to Drive</span>
-                    <span id="up-btn-ld" style="display:none;">Uploading...</span>
-                  </button>
-                </div>
-              </div>
-              <div id="q-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;"></div>
-              <div id="prog-outer" style="display:none;margin-top:14px;">
-                <div class="prog-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
-                <div id="prog-txt" style="text-align:center;color:rgba(255,255,255,.4);font-size:.78rem;margin-top:6px;"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TAB: PASTE URL -->
-          <div class="ts-panel" id="ts-url" style="display:none;">
-            <form id="url-form">
-              <div class="admin-form-row">
-                <div class="admin-form-group" style="flex:2;">
-                  <label class="admin-form-label">Image URL or Google Drive Share Link</label>
-                  <input type="text" id="url-inp" class="admin-form-control" placeholder="https://drive.google.com/file/d/FILE_ID/view  —or—  direct image URL" oninput="urlPreview()">
-                  <p style="color:rgba(255,255,255,.2);font-size:.75rem;margin-top:4px;">Drive share links auto-convert ✅</p>
-                </div>
-                <div class="admin-form-group">
-                  <label class="admin-form-label">Preview</label>
-                  <div id="url-prev" style="width:110px;height:80px;border-radius:8px;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.1);overflow:hidden;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:.75rem;">Preview</div>
-                </div>
-              </div>
-              <div class="admin-form-row">
-                <div class="admin-form-group"><label class="admin-form-label">Caption</label><input type="text" id="url-label" class="admin-form-control" placeholder="e.g. Gulmarg Winter"></div>
-                <div class="admin-form-group">
-                  <label class="admin-form-label">Category</label>
-                  <select id="url-cat" class="admin-form-control">
-                    <option value="">— None —</option>
-                    <option value="gulmarg">Gulmarg</option><option value="pahalgam">Pahalgam</option>
-                    <option value="sonmarg">Sonmarg</option><option value="srinagar">Srinagar</option>
-                  </select>
-                </div>
-              </div>
-              <button type="submit" class="admin-btn admin-btn-accent" style="padding:12px 28px;">📌 Add to Gallery</button>
-            </form>
-          </div>
-
-          <!-- TAB: BROWSE DRIVE FOLDER -->
-          <div class="ts-panel" id="ts-folder" style="display:none;">
-            <div style="padding:12px 16px;background:rgba(66,133,244,.07);border:1px solid rgba(66,133,244,.2);border-radius:10px;margin-bottom:14px;">
-              <p style="color:rgba(160,190,255,.8);font-size:.82rem;line-height:1.7;margin:0;">
-                Your configured Drive folder ID is already loaded below. You can also browse any other folder by pasting its ID.<br>
-                <strong>Folder ID:</strong> <code style="color:#6ea8ff;">1dQNdXi1ugtPZTp9mWkSN0MT8COWO5fKW</code>
-              </p>
-            </div>
-            <div style="display:flex;gap:10px;margin-bottom:14px;">
-              <input type="text" id="folder-inp" class="admin-form-control" value="1dQNdXi1ugtPZTp9mWkSN0MT8COWO5fKW" style="flex:1;">
-              <button onclick="browseFolder()" class="admin-btn admin-btn-primary" style="white-space:nowrap;padding:12px 18px;">🔍 Browse</button>
-            </div>
-            <div id="folder-status" style="font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:10px;min-height:20px;"></div>
-            <div id="folder-grid" class="pgrid" style="max-height:360px;overflow-y:auto;"></div>
-            <div id="fsel-bar" style="display:none;margin-top:14px;padding:14px;background:rgba(240,165,0,.07);border:1px solid rgba(240,165,0,.2);border-radius:10px;">
-              <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-                <img id="fsel-img" src="" style="width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0;">
-                <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:8px;">
-                  <input type="text" id="fsel-label" class="admin-form-control" placeholder="Caption" style="padding:8px 12px;">
-                  <div style="display:flex;gap:8px;">
-                    <select id="fsel-cat" class="admin-form-control" style="flex:1;">
-                      <option value="">— Category —</option>
-                      <option value="gulmarg">Gulmarg</option><option value="pahalgam">Pahalgam</option>
-                      <option value="sonmarg">Sonmarg</option><option value="srinagar">Srinagar</option>
-                    </select>
-                    <button onclick="addFolderSel()" class="admin-btn admin-btn-accent" style="padding:8px 18px;white-space:nowrap;">✅ Add to Gallery</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GALLERY GRID -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <span class="admin-card-title">🖼️ Gallery Images</span>
-          <span id="gal-count" style="color:var(--accent);font-size:.85rem;"></span>
-        </div>
-        <div class="admin-card-body">
-          <div class="admin-gallery-grid" id="gal-grid">
-            <div style="grid-column:1/-1;text-align:center;padding:40px;color:rgba(255,255,255,.3);">Loading...</div>
+        <div class="dk">
+          <div class="dk-hd"><h3><i class="fas fa-bolt"></i> Quick Actions</h3></div>
+          <div class="qa-grid">
+            <a href="tours.html" class="qa"><i class="fas fa-map-marked-alt"></i><span>Browse Tours</span></a>
+            <a href="cars.html" class="qa"><i class="fas fa-car"></i><span>Rent Vehicle</span></a>
+            <a href="book.html" class="qa"><i class="fas fa-shopping-cart"></i><span>My Cart</span></a>
+            <a href="contact.html" class="qa"><i class="fas fa-headset"></i><span>Support</span></a>
+            <a href="https://wa.me/919876543210" class="qa" target="_blank"><i class="fab fa-whatsapp" style="color:#25D366"></i><span>WhatsApp</span></a>
+            <a href="#" class="qa" onclick="switchDTab('profile');return false"><i class="fas fa-user-edit"></i><span>Edit Profile</span></a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ════════════════ SETTINGS ════════════════ -->
-    <div class="admin-panel" id="panel-settings">
+    <!-- BOOKINGS TAB -->
+    <div class="dtab" id="tab-bookings">
+      <div class="dp-hd"><h2><i class="fas fa-calendar-check"></i> My Bookings</h2><a href="tours.html" class="btn btn-y btn-sm"><i class="fas fa-plus"></i> Book New Trip</a></div>
+      <div id="all-bks"></div>
+    </div>
 
-      <!-- Connection info -->
-      <div class="admin-card">
-        <div class="admin-card-header"><span class="admin-card-title">🔗 Apps Script Connection</span></div>
-        <div class="admin-card-body">
-          <div style="padding:14px;background:rgba(46,165,100,.1);border:1px solid rgba(46,165,100,.25);border-radius:10px;margin-bottom:16px;">
-            <p style="color:rgba(100,220,150,.9);font-size:.85rem;margin:0;">
-              ✅ <strong>Already connected and configured.</strong><br>
-              Script: <code style="color:rgba(100,220,150,.7);font-size:.78rem;word-break:break-all;">https://script.google.com/macros/s/AKfycbyElPYutJDOBRhIaKCjOhZuqszHfKQq_illwvbMvab0qptC031sQQbBVpQDKIttlHzk/exec</code><br>
-              Drive Folder ID: <code style="color:rgba(100,220,150,.7);">1dQNdXi1ugtPZTp9mWkSN0MT8COWO5fKW</code>
-            </p>
+    <!-- PROFILE TAB -->
+    <div class="dtab" id="tab-profile">
+      <div class="dp-hd"><h2><i class="fas fa-user-edit"></i> My Profile</h2></div>
+      <div class="g2" style="align-items:start">
+        <div class="dk">
+          <div class="dk-hd"><h3>Personal Information</h3></div>
+          <div style="padding:0 17px 17px">
+            <div class="fg" style="margin-top:14px"><label class="flbl">Full Name</label><input type="text" class="fc" id="pr-name"/></div>
+            <div class="fg"><label class="flbl">Email Address</label><input type="email" class="fc" id="pr-email" readonly style="background:var(--g1)"/></div>
+            <div class="fg"><label class="flbl">Phone Number</label><input type="tel" class="fc" id="pr-phone" placeholder="+91 XXXXX XXXXX"/></div>
+            <div class="fg"><label class="flbl">City</label><input type="text" class="fc" id="pr-city" placeholder="Your city"/></div>
+            <button class="btn btn-y btn-sm" onclick="saveProfile()"><i class="fas fa-save"></i> Save Changes</button>
           </div>
-          <div id="conn-test-result" style="font-size:.82rem;margin-bottom:14px;"></div>
-          <button onclick="testConnection()" class="admin-btn admin-btn-primary" style="padding:12px 24px;">🔍 Test Connection</button>
+        </div>
+        <div class="dk">
+          <div class="dk-hd"><h3>Account Settings</h3></div>
+          <div style="padding:0 17px 17px">
+            <div class="set-row" style="padding-top:14px"><div><strong>Email Notifications</strong><p>Booking confirmations and updates</p></div><label class="tog"><input type="checkbox" checked/><span class="tr"></span></label></div>
+            <div class="set-row"><div><strong>WhatsApp Updates</strong><p>Trip reminders on WhatsApp</p></div><label class="tog"><input type="checkbox" checked/><span class="tr"></span></label></div>
+            <div class="set-row"><div><strong>Live Tracking Sharing</strong><p>Share live location with family</p></div><label class="tog"><input type="checkbox" checked/><span class="tr"></span></label></div>
+            <div style="padding-top:14px"><button class="btn btn-red btn-sm" onclick="if(confirm('Logout from KashmirHosts?'))doLogout()"><i class="fas fa-sign-out-alt"></i> Logout Account</button></div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Change password -->
-      <div class="admin-card">
-        <div class="admin-card-header"><span class="admin-card-title">🔐 Change Password</span></div>
-        <div class="admin-card-body">
-          <p style="color:rgba(255,255,255,.4);font-size:.82rem;margin-bottom:18px;">Password is stored securely in your Google Apps Script — only you can change it here.</p>
-          <div class="admin-form-row">
-            <div class="admin-form-group">
-              <label class="admin-form-label">Current Password</label>
-              <input type="password" id="cur-pass" class="admin-form-control" placeholder="Enter current password">
-            </div>
-            <div class="admin-form-group">
-              <label class="admin-form-label">New Password</label>
-              <input type="password" id="new-pass" class="admin-form-control" placeholder="New password (min 6 chars)">
-            </div>
-          </div>
-          <button onclick="changePass()" class="admin-btn admin-btn-accent" style="padding:12px 28px;">🔑 Update Password</button>
-          <div id="pass-result" style="margin-top:12px;font-size:.82rem;"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</main>
-
-<!-- ════════════════ IMAGE PICKER MODAL ════════════════ -->
-<div class="picker-overlay" id="picker-modal" style="display:none;">
-  <div class="picker-box">
-    <div class="picker-head">
-      <strong style="color:white;font-size:1rem;">🖼️ Pick an Image for Package</strong>
-      <button onclick="closePicker()" style="background:rgba(255,255,255,.1);border:none;color:white;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:1rem;">✕</button>
-    </div>
-    <div class="ptabs">
-      <button class="ptab on" data-pt="pt-gallery">From Gallery</button>
-      <button class="ptab" data-pt="pt-url">Direct URL</button>
-    </div>
-    <div class="picker-body">
-      <div id="pt-gallery">
-        <p style="color:rgba(255,255,255,.3);font-size:.78rem;margin:0 0 10px;">Click any image to use it as the package image.</p>
-        <div id="picker-grid" class="pgrid"></div>
-      </div>
-      <div id="pt-url" style="display:none;">
-        <input type="url" id="picker-url-inp" class="admin-form-control" placeholder="https://... or Google Drive share link" style="margin-bottom:10px;" oninput="pickerUrlPrev()">
-        <div id="picker-url-prev" style="width:100%;height:160px;border-radius:10px;background:rgba(255,255,255,.05);overflow:hidden;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);margin-bottom:14px;">Preview</div>
-        <button onclick="pickerUseUrl()" class="admin-btn admin-btn-accent" style="width:100%;padding:12px;">✅ Use This URL</button>
-      </div>
-    </div>
-  </div>
+  </main>
 </div>
-
-<!-- ════════════════ JAVASCRIPT ════════════════ -->
-<script>
-'use strict';
-// ── SECURITY ─────────────────────────────────────────────────
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if (e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key))) e.preventDefault();
-});
-
-// ── AUTH CHECK ────────────────────────────────────────────────
-const adminSession = JSON.parse(sessionStorage.getItem('sst_admin')||'null');
-if (!adminSession || Date.now()-adminSession.time > 8*60*60*1000) window.location.href = 'login.html';
-document.getElementById('admin-username').textContent = adminSession?.user||'Admin';
-document.getElementById('admin-avatar').textContent   = (adminSession?.user||'A')[0].toUpperCase();
-
-// ── YOUR APPS SCRIPT URL — PRE-FILLED ─────────────────────────
-const SCRIPT = 'https://script.google.com/macros/s/AKfycbyWEl6ywIhI5ZXK64ywhax3S6rzlh99wQmD9EhwfzYGrLBe_mItt-Wt3V08A--6hNg/exec';
-const FOLDER_ID = '1dQNdXi1ugtPZTp9mWkSN0MT8COWO5fKW';
-
-// ── API HELPERS ───────────────────────────────────────────────
-async function apiGet(params) {
-  const qs = Object.entries(params).map(([k,v])=>`${k}=${encodeURIComponent(v)}`).join('&');
-  const r = await fetch(`${SCRIPT}?${qs}`);
-  return r.json();
-}
-async function apiPost(body) {
-  const r = await fetch(SCRIPT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
-  return r.json();
-}
-
-// ── DATA ──────────────────────────────────────────────────────
-let packages = [], galleryImages = [];
-
-function saveLocal() {
-  localStorage.setItem('sst_packages', JSON.stringify(packages));
-  localStorage.setItem('sst_gallery',  JSON.stringify(galleryImages));
-}
-
-// ── INIT: LOAD FROM APPS SCRIPT ───────────────────────────────
-async function init() {
-  const banner = document.getElementById('conn-banner');
-  try {
-    const [pkgRes, galRes, statusRes] = await Promise.all([
-      apiGet({action:'getPackages'}),
-      apiGet({action:'getGallery'}),
-      apiGet({action:'getStatus'})
-    ]);
-    if (pkgRes.packages)  { packages       = pkgRes.packages;  saveLocal(); }
-    if (galRes.images)    { galleryImages   = galRes.images;    saveLocal(); }
-    banner.style.cssText  = 'padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;background:rgba(46,165,100,.1);border:1px solid rgba(46,165,100,.25);color:rgba(100,220,150,.9);';
-    banner.innerHTML = `✅ <strong>Connected to Apps Script.</strong> Drive folder: <strong>${statusRes.folderName||'SST Gallery'}</strong> — <a href="https://drive.google.com/drive/folders/${FOLDER_ID}" target="_blank" style="color:rgba(100,220,150,.9)">Open in Drive ↗</a>`;
-  } catch(e) {
-    // Fallback to localStorage
-    packages      = JSON.parse(localStorage.getItem('sst_packages')||'null') || getDefaultPackages();
-    galleryImages = JSON.parse(localStorage.getItem('sst_gallery') ||'null') || getDefaultGallery();
-    banner.style.cssText = 'padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;background:rgba(220,60,60,.1);border:1px solid rgba(220,60,60,.25);color:rgba(255,120,120,.9);';
-    banner.innerHTML = '❌ <strong>Cannot reach Apps Script.</strong> Using local data. Check your internet or redeploy the script.';
-  }
-  renderDashboard();
-}
-
-// ── PANEL SWITCHING ───────────────────────────────────────────
-const panelNames = {dashboard:'Dashboard',packages:'Tour Packages',gallery:'Gallery Images',settings:'Settings'};
-function switchPanel(id) {
-  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.admin-nav-link[data-panel]').forEach(l=>l.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  document.querySelector(`[data-panel="${id}"]`)?.classList.add('active');
-  document.getElementById('panel-title').textContent = panelNames[id]||id;
-  if (id==='dashboard') renderDashboard();
-  if (id==='packages')  renderPkgTable();
-  if (id==='gallery')   { renderGallery(); checkGalleryConn(); }
-}
-document.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>switchPanel(b.dataset.panel)));
-
-// ── UPLOAD TABS ───────────────────────────────────────────────
-document.querySelectorAll('.tsbtn').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.tsbtn').forEach(b=>b.classList.remove('on'));
-    document.querySelectorAll('.ts-panel').forEach(p=>p.style.display='none');
-    this.classList.add('on');
-    document.getElementById(this.dataset.ts).style.display='block';
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<div id="toasts"></div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+  firebase.initializeApp({
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT.firebaseapp.com",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
   });
-});
-document.querySelectorAll('.ptab').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
-    ['pt-gallery','pt-url'].forEach(id=>document.getElementById(id).style.display='none');
-    this.classList.add('on');
-    document.getElementById(this.dataset.pt).style.display='block';
-  });
-});
-
-// ── CONNECTION CHECK FOR GALLERY PANEL ───────────────────────
-async function checkGalleryConn() {
-  const b = document.getElementById('gal-banner');
-  try {
-    const d = await apiGet({action:'getStatus'});
-    if (d.success) {
-      b.style.cssText = 'display:block;padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;background:rgba(46,165,100,.1);border:1px solid rgba(46,165,100,.25);color:rgba(100,220,150,.9);';
-      b.innerHTML = `✅ <strong>Connected.</strong> Uploads go to Drive folder: <strong>${d.folderName}</strong> — <a href="${d.folderUrl}" target="_blank" style="color:rgba(100,220,150,.9)">Open ↗</a>`;
-    }
-  } catch(e) {
-    b.style.cssText = 'display:block;padding:12px 18px;border-radius:10px;margin-bottom:16px;font-size:.85rem;background:rgba(220,60,60,.1);border:1px solid rgba(220,60,60,.25);color:rgba(255,120,120,.9);';
-    b.innerHTML = '❌ Cannot reach Apps Script. Images will save locally only.';
-  }
-}
-
-// ── DASHBOARD RENDER ──────────────────────────────────────────
-function renderDashboard() {
-  document.getElementById('stat-packages').textContent = packages.length;
-  document.getElementById('stat-gallery').textContent  = galleryImages.length;
-  document.getElementById('dash-pkg-tbody').innerHTML  = packages.slice(0,5).map(p=>`
-    <tr>
-      <td><strong style="color:white">${esc(p.name)}</strong></td>
-      <td>${esc(p.duration||'-')}</td>
-      <td style="color:var(--accent)">₹${Number(p.price).toLocaleString('en-IN')}</td>
-      <td><span class="badge badge-success">Active</span></td>
-    </tr>`).join('') || '<tr><td colspan="4" style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">No packages</td></tr>';
-}
-
-// ── PACKAGES ──────────────────────────────────────────────────
-function renderPkgTable() {
-  document.getElementById('pkg-count').textContent = `${packages.length} packages`;
-  document.getElementById('pkg-tbody').innerHTML = packages.map(p=>`
-    <tr>
-      <td><div style="display:flex;align-items:center;gap:10px;">
-        <img src="${p.image||''}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;" onerror="this.style.display='none'">
-        <strong style="color:white">${esc(p.name)}</strong>
-      </div></td>
-      <td>${esc(p.duration||'-')}</td>
-      <td><span style="color:var(--accent);font-weight:700;">₹${Number(p.price).toLocaleString('en-IN')}</span></td>
-      <td><span class="badge badge-warning">${esc(p.badge||'-')}</span></td>
-      <td><div style="display:flex;gap:6px;">
-        <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="editPkg(${p.id})">✏️ Edit</button>
-        <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delPkg(${p.id})">🗑️</button>
-      </div></td>
-    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No packages yet</td></tr>';
-}
-
-document.getElementById('pkg-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const id  = document.getElementById('pkg-id').value;
-  const pkg = {
-    id:          id ? parseInt(id) : Date.now(),
-    name:        document.getElementById('pkg-name').value,
-    price:       parseInt(document.getElementById('pkg-price').value),
-    duration:    document.getElementById('pkg-duration').value,
-    badge:       document.getElementById('pkg-badge').value,
-    image:       document.getElementById('pkg-image').value,
-    description: document.getElementById('pkg-desc').value,
-    persons:     'Per Person'
-  };
-  document.getElementById('pkg-save-text').style.display = 'none';
-  document.getElementById('pkg-save-loader').style.display = 'inline';
-  try {
-    if (id) {
-      const idx = packages.findIndex(p=>p.id===parseInt(id));
-      if (idx!==-1) packages[idx] = pkg;
-      await apiPost({action:'updatePackage', package:pkg});
-      showToast('Package updated! ✅','success');
-    } else {
-      packages.push(pkg);
-      const r = await apiPost({action:'addPackage', package:pkg});
-      if (r.package?.id) pkg.id = r.package.id;
-      showToast('Package added! ✅','success');
-    }
-  } catch(e) { showToast('Saved locally (offline)','info'); }
-  saveLocal(); renderPkgTable(); renderDashboard(); resetPkgForm();
-  document.getElementById('pkg-save-text').style.display = 'inline';
-  document.getElementById('pkg-save-loader').style.display = 'none';
-});
-
-function editPkg(id) {
-  const p = packages.find(p=>p.id===id); if (!p) return;
-  document.getElementById('pkg-id').value       = p.id;
-  document.getElementById('pkg-name').value     = p.name;
-  document.getElementById('pkg-price').value    = p.price;
-  document.getElementById('pkg-duration').value = p.duration||'';
-  document.getElementById('pkg-badge').value    = p.badge||'';
-  document.getElementById('pkg-image').value    = p.image||'';
-  document.getElementById('pkg-desc').value     = p.description||'';
-  document.getElementById('pkg-form-title').textContent = '✏️ Edit Package';
-  document.getElementById('pkg-save-text').textContent  = '💾 Save Changes';
-  syncPkgThumb();
-  document.getElementById('pkg-form-card').scrollIntoView({behavior:'smooth'});
-}
-
-async function delPkg(id) {
-  if (!confirm('Delete this package? This cannot be undone.')) return;
-  packages = packages.filter(p=>p.id!==id);
-  try { await apiPost({action:'deletePackage', id}); } catch(e){}
-  saveLocal(); renderPkgTable(); renderDashboard();
-  showToast('Package deleted','success');
-}
-
-function resetPkgForm() {
-  document.getElementById('pkg-form').reset();
-  document.getElementById('pkg-id').value = '';
-  document.getElementById('pkg-form-title').textContent = '➕ Add New Package';
-  document.getElementById('pkg-save-text').textContent  = '➕ Add Package';
-  document.getElementById('pkg-img-thumb').innerHTML = '🖼️';
-  document.getElementById('pkg-img-thumb').style.background = 'rgba(255,255,255,.06)';
-}
-
-function syncPkgThumb() {
-  const url = document.getElementById('pkg-image').value.trim();
-  const el  = document.getElementById('pkg-img-thumb');
-  if (url) {
-    el.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='❌'">`;
-    el.style.background = 'transparent';
-  } else {
-    el.innerHTML = '🖼️';
-    el.style.background = 'rgba(255,255,255,.06)';
-  }
-}
-
-// ── IMAGE PICKER ──────────────────────────────────────────────
-function openPicker() {
-  document.getElementById('picker-modal').style.display = 'flex';
-  const grid = document.getElementById('picker-grid');
-  if (!galleryImages.length) {
-    grid.innerHTML = '<p style="color:rgba(255,255,255,.3);padding:20px;grid-column:1/-1;text-align:center;">No gallery images yet.<br>Upload some in the Gallery tab first.</p>';
-    return;
-  }
-  grid.innerHTML = galleryImages.map(img=>`
-    <div class="ptile" onclick="pickerPick('${img.url.replace(/'/g,"\\'")}')">
-      <img src="${img.thumb||img.url}" loading="lazy" onerror="this.src='${img.url}'">
-      <div class="ptile-name">${esc(img.label||'')}</div>
-    </div>`).join('');
-}
-
-function pickerPick(url) {
-  document.getElementById('pkg-image').value = url;
-  syncPkgThumb();
-  closePicker();
-}
-
-function pickerUrlPrev() {
-  const url = driveUrl(document.getElementById('picker-url-inp').value.trim());
-  const el  = document.getElementById('picker-url-prev');
-  el.innerHTML = url ? `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.innerHTML='❌ Bad URL'">` : 'Preview';
-}
-
-function pickerUseUrl() {
-  const url = driveUrl(document.getElementById('picker-url-inp').value.trim());
-  if (!url) return;
-  pickerPick(url);
-}
-
-function closePicker() {
-  document.getElementById('picker-modal').style.display = 'none';
-  document.getElementById('picker-url-inp').value = '';
-  document.getElementById('picker-url-prev').innerHTML = 'Preview';
-}
-document.getElementById('picker-modal').addEventListener('click', function(e){ if(e.target===this) closePicker(); });
-
-// ── GALLERY RENDER ────────────────────────────────────────────
-function renderGallery() {
-  document.getElementById('gal-count').textContent = `${galleryImages.length} images`;
-  const grid = document.getElementById('gal-grid');
-  if (!galleryImages.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:rgba(255,255,255,.3);">No images yet — upload some above!</div>';
-    return;
-  }
-  grid.innerHTML = galleryImages.map(img=>`
-    <div class="admin-gallery-item">
-      <img src="${img.thumb||img.url}" loading="lazy" onerror="this.src='${img.url}'">
-      <div class="admin-gallery-item-actions">
-        <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="delGalImg(${img.id})">🗑️</button>
-      </div>
-      <div class="admin-gallery-item-label">
-        ${esc(img.label||'Unnamed')}${img.category?` <span style="color:var(--accent)">[${esc(img.category)}]</span>`:''}${img.driveId?'<span style="float:right;opacity:.5" title="In Drive">☁️</span>':''}
-      </div>
-    </div>`).join('');
-}
-
-async function delGalImg(id) {
-  if (!confirm('Remove this image from gallery?')) return;
-  galleryImages = galleryImages.filter(i=>i.id!=id);
-  try { await apiPost({action:'deleteGalleryImage', id}); } catch(e){}
-  saveLocal(); renderGallery();
-  showToast('Image removed','success');
-}
-
-// ── DEVICE UPLOAD ─────────────────────────────────────────────
-let queue = [];
-
-function onDrop(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('drag');
-  onFilePick(e.dataTransfer.files);
-}
-
-function onFilePick(files) {
-  Array.from(files).forEach(f=>{
-    if (!f.type.startsWith('image/')) return;
-    if (f.size > 10*1024*1024) { showToast(`${f.name}: too large (max 10MB)`,'error'); return; }
-    const r = new FileReader();
-    r.onload = ev => {
-      queue.push({
-        id: Date.now()+Math.random(),
-        dataUrl: ev.target.result,
-        b64: ev.target.result.split(',')[1],
-        mime: f.type, fname: f.name,
-        label: f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' '),
-        cat: '', status: 'pending'
-      });
-      renderQueue();
-    };
-    r.readAsDataURL(f);
-  });
-  if (files.length) document.getElementById('q-wrap').style.display = 'block';
-}
-
-function renderQueue() {
-  document.getElementById('q-count').textContent = `${queue.length} image${queue.length!==1?'s':''} selected`;
-  document.getElementById('q-grid').innerHTML = queue.map((f,i)=>`
-    <div class="qtile" style="border:2px solid ${f.status==='done'?'rgba(46,165,100,.6)':f.status==='error'?'rgba(220,60,60,.5)':'rgba(255,255,255,.07)'}">
-      <img src="${f.dataUrl}">
-      ${f.status==='done'?'<div style="position:absolute;top:6px;left:6px;background:rgba(46,165,100,.9);color:white;border-radius:20px;padding:2px 8px;font-size:.7rem;font-weight:700;">✓ Done</div>':''}
-      ${f.status==='uploading'?'<div style="position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;"><div class="spinner" style="width:24px;height:24px;border-width:3px;"></div></div>':''}
-      ${f.status==='error'?'<div style="position:absolute;top:6px;left:6px;background:rgba(220,60,60,.9);color:white;border-radius:20px;padding:2px 8px;font-size:.7rem;">❌ Error</div>':''}
-      <div style="padding:6px;">
-        <input type="text" value="${esc(f.label)}" onchange="queue[${i}].label=this.value" class="admin-form-control" style="font-size:.72rem;padding:4px 8px;margin-bottom:4px;" placeholder="Caption">
-        <select onchange="queue[${i}].cat=this.value" class="admin-form-control" style="font-size:.72rem;padding:4px 8px;">
-          <option value="" ${!f.cat?'selected':''}>— Category —</option>
-          <option value="gulmarg" ${f.cat==='gulmarg'?'selected':''}>Gulmarg</option>
-          <option value="pahalgam" ${f.cat==='pahalgam'?'selected':''}>Pahalgam</option>
-          <option value="sonmarg" ${f.cat==='sonmarg'?'selected':''}>Sonmarg</option>
-          <option value="srinagar" ${f.cat==='srinagar'?'selected':''}>Srinagar</option>
-        </select>
-      </div>
-      ${f.status!=='done'?`<button onclick="queue.splice(${i},1);renderQueue();if(!queue.length)document.getElementById('q-wrap').style.display='none';" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.7);border:none;color:white;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:.7rem;">✕</button>`:''}
-    </div>`).join('');
-}
-
-function clearQ() {
-  queue = [];
-  document.getElementById('q-wrap').style.display = 'none';
-  document.getElementById('file-inp').value = '';
-}
-
-async function uploadAll() {
-  const pending = queue.filter(f=>f.status==='pending');
-  if (!pending.length) return;
-  const btn=document.getElementById('up-btn'), txt=document.getElementById('up-btn-txt'), ld=document.getElementById('up-btn-ld');
-  const prog=document.getElementById('prog-outer'), bar=document.getElementById('prog-bar'), ptxt=document.getElementById('prog-txt');
-  btn.disabled=true; txt.style.display='none'; ld.style.display='inline'; prog.style.display='block';
-  let done=0, errs=0;
-  for (let i=0;i<queue.length;i++) {
-    if (queue[i].status!=='pending') continue;
-    queue[i].status='uploading'; renderQueue();
-    ptxt.textContent=`Uploading ${done+errs+1} of ${pending.length}...`;
-    bar.style.width=`${Math.round(((done+errs)/pending.length)*100)}%`;
-    try {
-      const r = await apiPost({action:'uploadImage', filename:queue[i].fname, mimeType:queue[i].mime, base64Data:queue[i].b64, label:queue[i].label, category:queue[i].cat});
-      if (r.success) { queue[i].status='done'; if(r.image) galleryImages.push(r.image); done++; }
-      else { queue[i].status='error'; errs++; console.error(r.error); }
-    } catch(e) { queue[i].status='error'; errs++; }
-    renderQueue();
-  }
-  bar.style.width='100%';
-  ptxt.textContent=`✅ ${done} uploaded${errs?` · ❌ ${errs} failed`:''}`;
-  saveLocal(); renderGallery();
-  btn.disabled=false; txt.style.display='inline'; ld.style.display='none';
-  if (done) showToast(`${done} image${done>1?'s':''} uploaded to Drive! 🎉`,'success');
-  if (errs) showToast(`${errs} failed — check file size / connection`,'error');
-  setTimeout(()=>{ queue=queue.filter(f=>f.status!=='done'); if(!queue.length){document.getElementById('q-wrap').style.display='none';prog.style.display='none';}else{renderQueue();prog.style.display='none';} },3000);
-}
-
-// ── URL TAB ───────────────────────────────────────────────────
-function driveUrl(url) {
-  if (!url) return '';
-  const m = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)||url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
-  return url;
-}
-
-function urlPreview() {
-  const url = driveUrl(document.getElementById('url-inp').value.trim());
-  const el  = document.getElementById('url-prev');
-  if (url) { el.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='❌'">`; el.style.background='transparent'; }
-  else { el.innerHTML='Preview'; el.style.background='rgba(255,255,255,.05)'; }
-}
-
-document.getElementById('url-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const url = driveUrl(document.getElementById('url-inp').value.trim());
-  if (!url) return;
-  const img = {id:Date.now(), url, label:document.getElementById('url-label').value||'Kashmir', category:document.getElementById('url-cat').value};
-  galleryImages.push(img);
-  try { await apiPost({action:'addGalleryImage', image:img}); } catch(e){}
-  saveLocal(); renderGallery(); this.reset();
-  document.getElementById('url-prev').innerHTML='Preview';
-  showToast('Image added to gallery!','success');
-});
-
-// ── DRIVE FOLDER BROWSER ──────────────────────────────────────
-let folderFiles=[], folderSel=null;
-
-async function browseFolder() {
-  const fid = document.getElementById('folder-inp').value.trim()||FOLDER_ID;
-  if (!fid) { showToast('Enter a folder ID','error'); return; }
-  const st=document.getElementById('folder-status'), gr=document.getElementById('folder-grid');
-  st.textContent='🔄 Loading...';
-  gr.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:20px;color:rgba(255,255,255,.3);"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;border-width:3px;"></div>Fetching images...</div>';
-  document.getElementById('fsel-bar').style.display='none';
-  try {
-    const d = await apiGet({action:'getDriveImages', folderId:fid});
-    if (d.error) { st.textContent='❌ '+d.error; gr.innerHTML=''; return; }
-    folderFiles = d.images||[];
-    st.textContent = `✅ ${folderFiles.length} images found in "${d.folder}"`;
-    gr.innerHTML = folderFiles.map((img,i)=>`
-      <div class="ptile" id="ft${i}" onclick="selFolderTile(${i})">
-        <img src="${img.thumb||img.url}" loading="lazy" onerror="this.src='${img.url}'">
-        <div class="ptile-name">${esc(img.name||'')}</div>
-      </div>`).join('') || '<div style="grid-column:1/-1;text-align:center;padding:20px;color:rgba(255,255,255,.3);">No images found.</div>';
-  } catch(e) { st.textContent='❌ '+e.message; gr.innerHTML=''; }
-}
-
-function selFolderTile(i) {
-  document.querySelectorAll('[id^="ft"]').forEach(el=>el.classList.remove('sel'));
-  document.getElementById('ft'+i).classList.add('sel');
-  folderSel = folderFiles[i];
-  document.getElementById('fsel-img').src   = folderSel.thumb||folderSel.url;
-  document.getElementById('fsel-label').value = folderSel.name||'';
-  document.getElementById('fsel-bar').style.display = 'block';
-  document.getElementById('fsel-bar').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-async function addFolderSel() {
-  if (!folderSel) return;
-  const img = {id:Date.now(), url:folderSel.url, thumb:folderSel.thumb, driveId:folderSel.id,
-    label:document.getElementById('fsel-label').value||folderSel.name||'Kashmir',
-    category:document.getElementById('fsel-cat').value};
-  galleryImages.push(img);
-  try { await apiPost({action:'addGalleryImage', image:img}); } catch(e){}
-  saveLocal(); renderGallery();
-  showToast('Image added to gallery!','success');
-  document.getElementById('fsel-bar').style.display='none';
-  document.querySelectorAll('[id^="ft"]').forEach(el=>el.classList.remove('sel'));
-  folderSel=null;
-}
-
-// ── SETTINGS ─────────────────────────────────────────────────
-async function testConnection() {
-  const el = document.getElementById('conn-test-result');
-  el.style.color='rgba(255,255,255,.4)'; el.textContent='🔄 Testing...';
-  try {
-    const d = await apiGet({action:'getStatus'});
-    if (d.success) { el.style.color='rgba(100,220,150,.9)'; el.textContent=`✅ Connected! Folder: "${d.folderName}" · Version: ${d.version}`; }
-    else { throw new Error(d.error||'Failed'); }
-  } catch(e) { el.style.color='rgba(255,120,120,.9)'; el.textContent='❌ '+e.message; }
-}
-
-async function changePass() {
-  const cur=document.getElementById('cur-pass').value;
-  const nw =document.getElementById('new-pass').value;
-  const el  =document.getElementById('pass-result');
-  if (!cur||!nw) { el.style.color='rgba(255,120,120,.9)'; el.textContent='⚠️ Both fields are required'; return; }
-  el.style.color='rgba(255,255,255,.4)'; el.textContent='🔄 Updating...';
-  try {
-    const d = await apiPost({action:'changePassword', currentPass:cur, newPass:nw});
-    if (d.success) {
-      el.style.color='rgba(100,220,150,.9)'; el.textContent='✅ Password changed! Use new password next time you login.';
-      document.getElementById('cur-pass').value=''; document.getElementById('new-pass').value='';
-      showToast('Password changed successfully!','success');
-    } else { el.style.color='rgba(255,120,120,.9)'; el.textContent='❌ '+d.error; }
-  } catch(e) { el.style.color='rgba(255,120,120,.9)'; el.textContent='❌ '+e.message; }
-}
-
-// ── HELPERS ───────────────────────────────────────────────────
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function showToast(msg, type='info') {
-  const c=document.getElementById('toast-container'), t=document.createElement('div');
-  t.className=`toast ${type}`; t.innerHTML=`<span>${type==='success'?'✅':type==='error'?'❌':'💬'}</span><span>${msg}</span>`;
-  c.appendChild(t); setTimeout(()=>t.remove(),4000);
-}
-function adminLogout() { sessionStorage.removeItem('sst_admin'); window.location.href='login.html'; }
-
-function getDefaultPackages() {
-  return [{id:1,name:'Gulmarg Tour',price:4999,duration:'2 Days / 1 Night',badge:'Popular',description:'Experience Gulmarg.',image:'https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?w=600&q=80'},
-    {id:2,name:'Pahalgam Tour',price:5499,duration:'2 Days / 1 Night',badge:'Trending',description:'Valley of Shepherds.',image:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80'},
-    {id:3,name:'Sonmarg Tour',price:4499,duration:'1 Day',badge:'Adventure',description:'Meadow of Gold.',image:'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80'},
-    {id:4,name:'Srinagar Local Tour',price:2999,duration:'1 Day',badge:'Must Do',description:'Soul of Kashmir.',image:'https://images.unsplash.com/photo-1597040663342-45b6af3d91a5?w=600&q=80'},
-    {id:5,name:'Complete J&K Tour',price:14999,duration:'7 Days / 6 Nights',badge:'Best Value',description:'Ultimate J&K.',image:'https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=80'}];
-}
-function getDefaultGallery() {
-  return [{id:1,url:'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=600&q=80',label:'Kashmir Valley',category:''},
-    {id:2,url:'https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?w=600&q=80',label:'Gulmarg Winter',category:'gulmarg'},
-    {id:3,url:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80',label:'Pahalgam Valley',category:'pahalgam'},
-    {id:4,url:'https://images.unsplash.com/photo-1597040663342-45b6af3d91a5?w=600&q=80',label:'Dal Lake',category:'srinagar'}];
-}
-
-// Mobile sidebar
-const sbt = document.getElementById('sidebar-toggle');
-if (window.innerWidth < 769) { sbt.style.display='block'; sbt.addEventListener('click',()=>document.getElementById('admin-sidebar').classList.toggle('open')); }
-
-// ── START ─────────────────────────────────────────────────────
-init();
-</script>
+  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
