@@ -15,12 +15,12 @@ import {
 
 // ⚠️  REPLACE THESE WITH YOUR FIREBASE PROJECT CREDENTIALS
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyDZXs-SQvcryKtDh4UjH6ZPAIqY5nMx2lg",
+  authDomain: "kashmir-hosts.firebaseapp.com",
+  projectId: "kashmir-hosts",
+  storageBucket: "kashmir-hosts.firebasestorage.app",
+  messagingSenderId: "129450992454",
+  appId: "1:129450992454:web:3b47749fee0d459ad37b47"
 };
 
 const app = initializeApp(firebaseConfig);
