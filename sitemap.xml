@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://kashmirhosts.com/</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200</image:loc>
+      <image:title>KashmirHosts — Explore Kashmir with Comfort and Trust</image:title>
+    </image:image>
+  </url>
+
+  <!-- Tour Packages -->
+  <url>
+    <loc>https://kashmirhosts.com/tours.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Our Vehicles -->
+  <url>
+    <loc>https://kashmirhosts.com/cars.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- About Us -->
+  <url>
+    <loc>https://kashmirhosts.com/about.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Contact Us -->
+  <url>
+    <loc>https://kashmirhosts.com/contact.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Book Now / Cart -->
+  <url>
+    <loc>https://kashmirhosts.com/book.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://kashmirhosts.com/privacy.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- Login (low priority — no user content) -->
+  <url>
+    <loc>https://kashmirhosts.com/login.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
+
+  <!-- Signup -->
+  <url>
+    <loc>https://kashmirhosts.com/signup.html</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,27 @@
+# robots.txt — KashmirHosts
+# https://kashmirhosts.com
+
+User-agent: *
+
+# Allow all public pages
+Allow: /
+Allow: /index.html
+Allow: /tours.html
+Allow: /cars.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /book.html
+Allow: /privacy.html
+
+# Block private/auth pages from indexing
+Disallow: /dashboard.html
+Disallow: /admin.html
+Disallow: /login.html
+Disallow: /signup.html
+
+# Block CSS/JS directories (no value for SEO)
+Disallow: /js/
+Disallow: /css/
+
+# Sitemap location
+Sitemap: https://kashmirhosts.com/sitemap.xml

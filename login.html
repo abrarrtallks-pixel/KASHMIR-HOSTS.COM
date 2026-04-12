@@ -6,6 +6,7 @@
   <title>Sign In — KashmirHosts</title>
   <meta name="description" content="Login to manage your Kashmir tour bookings."/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/shared.css"/>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
@@ -28,6 +29,9 @@
     <div class="a-form">
       <h2>Sign In</h2>
       <p>No account? <a href="signup.html">Create one free</a></p>
+      <div class="alert al-i" style="font-size:.8rem;padding:9px 12px;margin-bottom:14px">
+        <i class="fas fa-info-circle"></i> <span><strong>Admin?</strong> Login with your admin email here — you'll be redirected to the admin panel automatically.</span>
+      </div>
       <button class="g-btn" onclick="handleGoogle()">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google"/> Continue with Google
       </button>
@@ -57,12 +61,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
   firebase.initializeApp({
-    apiKey: "AIzaSyDZXs-SQvcryKtDh4UjH6ZPAIqY5nMx2lg",
-  authDomain: "kashmir-hosts.firebaseapp.com",
-  projectId: "kashmir-hosts",
-  storageBucket: "kashmir-hosts.firebasestorage.app",
-  messagingSenderId: "129450992454",
-  appId: "1:129450992454:web:3b47749fee0d459ad37b47"
+    apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",
+    projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",
+    messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"
   });
   </script>
   <script src="js/main.js"></script>

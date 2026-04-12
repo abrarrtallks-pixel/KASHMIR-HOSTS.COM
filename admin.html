@@ -4,32 +4,52 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Admin Panel — KashmirHosts</title>
+  <meta name="description" content="KashmirHosts admin panel — manage tours, vehicles and bookings."/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>"/>
+  <link rel="stylesheet" href="css/shared.css"/>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body class="db">
+
+<!-- PAGE LOADER (hides when JS loads) -->
 <div id="loader"><div class="ld-logo">Kashmir<b>Hosts</b></div><div class="ld-bar"><div class="ld-fill"></div></div></div>
 
-<!-- ADMIN LOGIN -->
-<div class="adm-login" id="adm-login">
-  <div class="adm-login-c">
-    <div style="font-size:2.8rem;margin-bottom:14px">&#128274;</div>
-    <h2>Admin Access</h2>
-    <p style="color:var(--g3);font-size:.83rem;margin-bottom:20px">Authorized personnel only. Use admin credentials.</p>
-    <div id="adm-err" class="alert al-e" style="display:none"></div>
-    <div class="fg"><label class="flbl">Admin Email</label><input type="email" id="adm-email" class="fc" placeholder="admin@kashmirhosts.com" value="admin@kashmirhosts.com"/></div>
-    <div class="fg"><label class="flbl">Password</label><input type="password" id="adm-pass" class="fc" placeholder="Admin password"/></div>
-    <button class="btn btn-y btn-bl" id="adm-btn" onclick="adminLogin()"><i class="fas fa-lock-open"></i> Access Admin Panel</button>
-    <p style="margin-top:12px;font-size:.76rem;color:var(--g3)">Demo: admin@kashmirhosts.com</p>
+<!-- ════════════════════════════════════════════════════
+     AUTH GATE — shown while Firebase checks login state.
+     initAdmin() in main.js will EITHER:
+       (a) hide this and show #adm-panel  — if admin is logged in
+       (b) redirect to login.html         — if not logged in
+     ════════════════════════════════════════════════════ -->
+<div class="adm-gate" id="adm-gate">
+  <div class="adm-gate-c">
+    <div class="spin"></div>
+    <div class="ld-logo" style="font-size:1.6rem;margin-bottom:8px">Kashmir<b>Hosts</b></div>
+    <p>Verifying admin access...</p>
+    <p style="font-size:.78rem;margin-top:6px;color:rgba(255,255,255,.3)">
+      Not an admin? <a href="login.html" style="color:var(--y)">Go to Login</a>
+    </p>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ════════════════════════════════════════════════════
+     ADMIN PANEL — hidden until auth gate passes
+     ════════════════════════════════════════════════════ -->
 <div class="dw" id="adm-panel" style="display:none">
+
+  <!-- SIDEBAR -->
   <aside class="dsb" id="dsb">
-    <div class="dsb-brand"><a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a><small style="color:var(--y)">Admin Panel</small></div>
-    <div class="dsb-user"><div class="dsb-av" style="background:var(--y);color:var(--c2)">GK</div><div><div class="dsb-name">Gazanfar Khan</div><div class="dsb-role">Super Admin</div></div></div>
+    <div class="dsb-brand">
+      <a href="index.html" class="nav-logo">Kashmir<b>Hosts</b></a>
+      <small style="color:var(--y)">Admin Panel</small>
+    </div>
+    <div class="dsb-user">
+      <div class="dsb-av" id="adm-av" style="background:var(--y);color:var(--c2)">GK</div>
+      <div>
+        <div class="dsb-name" id="adm-name">Gazanfar Khan</div>
+        <div class="dsb-role">Super Admin</div>
+      </div>
+    </div>
     <nav class="dsb-nav">
       <button class="dn on" data-tab="overview"><i class="fas fa-th-large"></i> Overview</button>
       <button class="dn" data-tab="bookings"><i class="fas fa-calendar-check"></i> All Bookings</button>
@@ -38,124 +58,283 @@
       <button class="dn" data-tab="users"><i class="fas fa-users"></i> Users</button>
       <div class="dsb-div"></div>
       <a href="index.html" class="dn"><i class="fas fa-external-link-alt"></i> View Website</a>
+      <a href="dashboard.html" class="dn"><i class="fas fa-user-circle"></i> User Panel</a>
       <button class="dn lo" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </nav>
+    <div class="dsb-foot">
+      <a href="https://wa.me/919876543210" style="color:rgba(255,255,255,.35);font-size:.76rem">
+        <i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Support
+      </a>
+    </div>
   </aside>
+
+  <!-- MAIN CONTENT -->
   <main class="dm">
     <div class="dtop">
       <button class="sb-tog" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
       <div class="dtop-ti" id="adm-top-ti">Admin Overview</div>
       <div class="dtop-acts">
         <button class="btn btn-oy btn-sm" onclick="exportCSV()"><i class="fas fa-download"></i> Export CSV</button>
+        <button class="btn btn-y btn-sm" onclick="loadAdminData()"><i class="fas fa-sync"></i> Refresh</button>
       </div>
     </div>
 
-    <!-- OVERVIEW -->
+    <!-- ── OVERVIEW TAB ─────────────────────────────── -->
     <div class="dtab on" id="tab-overview">
       <div class="stats-grid">
-        <div class="sc fu"><div class="sc-ic sci-y"><i class="fas fa-calendar-check"></i></div><div class="sc-v" id="a-bks">0</div><div class="sc-l">Total Bookings</div></div>
-        <div class="sc fu d1"><div class="sc-ic sci-g"><i class="fas fa-rupee-sign"></i></div><div class="sc-v" id="a-rev">&#8377;0</div><div class="sc-l">Total Revenue</div></div>
-        <div class="sc fu d2"><div class="sc-ic sci-pk"><i class="fas fa-users"></i></div><div class="sc-v" id="a-usr">0</div><div class="sc-l">Total Users</div></div>
-        <div class="sc fu d3"><div class="sc-ic sci-o"><i class="fas fa-map-marked-alt"></i></div><div class="sc-v" id="a-tours">0</div><div class="sc-l">Active Tours</div></div>
+        <div class="sc fu">
+          <div class="sc-ic sci-y"><i class="fas fa-calendar-check"></i></div>
+          <div class="sc-v" id="a-bks">0</div>
+          <div class="sc-l">Total Bookings</div>
+        </div>
+        <div class="sc fu d1">
+          <div class="sc-ic sci-g"><i class="fas fa-rupee-sign"></i></div>
+          <div class="sc-v" id="a-rev">&#8377;0</div>
+          <div class="sc-l">Total Revenue</div>
+        </div>
+        <div class="sc fu d2">
+          <div class="sc-ic sci-pk"><i class="fas fa-users"></i></div>
+          <div class="sc-v" id="a-usr">0</div>
+          <div class="sc-l">Registered Users</div>
+        </div>
+        <div class="sc fu d3">
+          <div class="sc-ic sci-o"><i class="fas fa-map-marked-alt"></i></div>
+          <div class="sc-v" id="a-tours">0</div>
+          <div class="sc-l">Active Tours</div>
+        </div>
       </div>
       <div class="dk" style="margin-top:18px">
-        <div class="dk-hd"><h3><i class="fas fa-history"></i> Recent Bookings</h3></div>
-        <div id="adm-recent"></div>
+        <div class="dk-hd">
+          <h3><i class="fas fa-history"></i> Recent Bookings</h3>
+          <a href="#" onclick="switchATab('bookings');return false">View All</a>
+        </div>
+        <div id="adm-recent">
+          <div style="padding:20px;text-align:center;color:var(--g3)">Loading bookings...</div>
+        </div>
       </div>
     </div>
 
-    <!-- BOOKINGS -->
+    <!-- ── BOOKINGS TAB ────────────────────────────── -->
     <div class="dtab" id="tab-bookings">
-      <div class="dp-hd"><h2><i class="fas fa-calendar-check"></i> All Bookings</h2></div>
+      <div class="dp-hd">
+        <h2><i class="fas fa-calendar-check"></i> All Bookings</h2>
+        <button class="btn btn-oy btn-sm" onclick="exportCSV()"><i class="fas fa-download"></i> Export CSV</button>
+      </div>
       <div class="tbl-wrap">
         <table class="tbl">
-          <thead><tr><th>ID</th><th>Customer</th><th>Tour / Vehicle</th><th>Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
-          <tbody id="bks-tbody"></tbody>
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Customer</th>
+              <th>Tour / Vehicle</th>
+              <th>Travel Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bks-tbody">
+            <tr><td colspan="7" style="text-align:center;padding:26px;color:var(--g3)">Loading...</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
 
-    <!-- TOURS -->
+    <!-- ── TOURS TAB ───────────────────────────────── -->
     <div class="dtab" id="tab-tours">
-      <div class="dp-hd"><h2><i class="fas fa-map-marked-alt"></i> Manage Tours</h2><button class="btn btn-y btn-sm" onclick="openTourMod_()"><i class="fas fa-plus"></i> Add Tour</button></div>
-      <div class="adm-grid" id="adm-tours"></div>
+      <div class="dp-hd">
+        <h2><i class="fas fa-map-marked-alt"></i> Manage Tours</h2>
+        <button class="btn btn-y btn-sm" onclick="openTourMod_()">
+          <i class="fas fa-plus"></i> Add New Tour
+        </button>
+      </div>
+      <div class="adm-grid" id="adm-tours">
+        <div style="padding:20px;color:var(--g3);font-size:.85rem">Loading tours...</div>
+      </div>
     </div>
 
-    <!-- VEHICLES -->
+    <!-- ── VEHICLES TAB ────────────────────────────── -->
     <div class="dtab" id="tab-vehicles">
-      <div class="dp-hd"><h2><i class="fas fa-car"></i> Manage Vehicles</h2><button class="btn btn-y btn-sm" onclick="openCarMod_()"><i class="fas fa-plus"></i> Add Vehicle</button></div>
-      <div class="adm-grid" id="adm-cars"></div>
+      <div class="dp-hd">
+        <h2><i class="fas fa-car"></i> Manage Vehicles</h2>
+        <button class="btn btn-y btn-sm" onclick="openCarMod_()">
+          <i class="fas fa-plus"></i> Add New Vehicle
+        </button>
+      </div>
+      <div class="adm-grid" id="adm-cars">
+        <div style="padding:20px;color:var(--g3);font-size:.85rem">Loading vehicles...</div>
+      </div>
     </div>
 
-    <!-- USERS -->
+    <!-- ── USERS TAB ───────────────────────────────── -->
     <div class="dtab" id="tab-users">
-      <div class="dp-hd"><h2><i class="fas fa-users"></i> Registered Users</h2></div>
+      <div class="dp-hd">
+        <h2><i class="fas fa-users"></i> Registered Users</h2>
+      </div>
       <div class="tbl-wrap">
         <table class="tbl">
-          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th></tr></thead>
-          <tbody id="usr-tbody"></tbody>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Joined Date</th>
+            </tr>
+          </thead>
+          <tbody id="usr-tbody">
+            <tr><td colspan="4" style="text-align:center;padding:26px;color:var(--g3)">Loading...</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
+
   </main>
 </div>
 
-<!-- TOUR MODAL -->
+<!-- ═══════════════════
+     TOUR MODAL
+     ═══════════════════ -->
 <div class="modal-ov" id="tour-mod">
   <div class="modal-c">
-    <div class="modal-hd"><h3 id="tm-title">Add New Tour</h3><button class="modal-cls" onclick="closeModal('tour-mod')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-hd">
+      <h3 id="tm-title">Add New Tour</h3>
+      <button class="modal-cls" onclick="closeModal('tour-mod')"><i class="fas fa-times"></i></button>
+    </div>
     <div class="modal-bd">
       <div class="f2">
-        <div class="fg"><label class="flbl">Tour Name *</label><input type="text" id="tm-name" class="fc" placeholder="e.g. Pahalgam Valley Escape"/></div>
-        <div class="fg"><label class="flbl">Category</label>
-          <select id="tm-cat" class="fc"><option value="nature">&#127807; Nature</option><option value="adventure">&#9971;&#65039; Adventure</option><option value="romance">&#128145; Romance</option><option value="family">&#128106;&#8205;&#128105;&#8205;&#128103; Family</option><option value="ladies">&#127800; Ladies Escape</option><option value="solo">&#127752; Solo</option><option value="pilgrimage">&#128332;&#65039; Pilgrimage</option></select></div>
+        <div class="fg">
+          <label class="flbl">Tour Name *</label>
+          <input type="text" id="tm-name" class="fc" placeholder="e.g. Pahalgam Valley Escape"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Category</label>
+          <select id="tm-cat" class="fc">
+            <option value="nature">&#127807; Nature</option>
+            <option value="adventure">&#9971;&#65039; Adventure</option>
+            <option value="romance">&#128145; Romance / Honeymoon</option>
+            <option value="family">&#128106; Family</option>
+            <option value="ladies">&#127800; Ladies Escape</option>
+            <option value="solo">&#127752; Solo</option>
+            <option value="pilgrimage">&#128332;&#65039; Pilgrimage</option>
+          </select>
+        </div>
       </div>
       <div class="f2">
-        <div class="fg"><label class="flbl">Duration (Days)</label><input type="number" id="tm-days" class="fc" value="3" min="1"/></div>
-        <div class="fg"><label class="flbl">Price (&#8377;/person)</label><input type="number" id="tm-price" class="fc" placeholder="8999"/></div>
+        <div class="fg">
+          <label class="flbl">Duration (Days)</label>
+          <input type="number" id="tm-days" class="fc" value="3" min="1"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Price (&#8377; per person)</label>
+          <input type="number" id="tm-price" class="fc" placeholder="8999"/>
+        </div>
       </div>
-      <div class="fg"><label class="flbl">Image URL (Unsplash)</label><input type="url" id="tm-img" class="fc" placeholder="https://images.unsplash.com/..."/></div>
-      <div class="fg"><label class="flbl">Description *</label><textarea id="tm-desc" class="fc" rows="3" placeholder="Short tour description..."></textarea></div>
+      <div class="f2">
+        <div class="fg">
+          <label class="flbl">Old Price (&#8377; strikethrough)</label>
+          <input type="number" id="tm-old" class="fc" placeholder="10999"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Rating (e.g. 4.9)</label>
+          <input type="number" id="tm-rating" class="fc" placeholder="4.8" step="0.1" min="1" max="5"/>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flbl">Image URL (Unsplash link)</label>
+        <input type="url" id="tm-img" class="fc" placeholder="https://images.unsplash.com/..."/>
+      </div>
+      <div class="fg">
+        <label class="flbl">Description *</label>
+        <textarea id="tm-desc" class="fc" rows="3" placeholder="Short tour description shown on card..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="flbl">What's Included (comma separated)</label>
+        <input type="text" id="tm-inc" class="fc" placeholder="Hotel, Meals, Transport, Guide"/>
+      </div>
     </div>
-    <div class="modal-ft"><button class="btn btn-oy" onclick="closeModal('tour-mod')">Cancel</button><button class="btn btn-y" onclick="saveTour()"><i class="fas fa-save"></i> Save Tour</button></div>
+    <div class="modal-ft">
+      <button class="btn btn-oy" onclick="closeModal('tour-mod')">Cancel</button>
+      <button class="btn btn-y" onclick="saveTour()"><i class="fas fa-save"></i> Save Tour</button>
+    </div>
   </div>
 </div>
 
-<!-- VEHICLE MODAL -->
+<!-- ═══════════════════
+     VEHICLE MODAL
+     ═══════════════════ -->
 <div class="modal-ov" id="car-mod">
   <div class="modal-c">
-    <div class="modal-hd"><h3 id="cm-title">Add Vehicle</h3><button class="modal-cls" onclick="closeModal('car-mod')"><i class="fas fa-times"></i></button></div>
+    <div class="modal-hd">
+      <h3 id="cm-title">Add New Vehicle</h3>
+      <button class="modal-cls" onclick="closeModal('car-mod')"><i class="fas fa-times"></i></button>
+    </div>
     <div class="modal-bd">
       <div class="f2">
-        <div class="fg"><label class="flbl">Vehicle Name *</label><input type="text" id="cm-name" class="fc" placeholder="e.g. Innova Crysta"/></div>
-        <div class="fg"><label class="flbl">Type</label>
-          <select id="cm-type" class="fc"><option>Sedan</option><option>MPV</option><option>Luxury MPV</option><option>Hybrid MPV</option><option>Coach/Bus</option><option>Van</option></select></div>
+        <div class="fg">
+          <label class="flbl">Vehicle Name *</label>
+          <input type="text" id="cm-name" class="fc" placeholder="e.g. Innova Crysta"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Type</label>
+          <select id="cm-type" class="fc">
+            <option>Sedan</option>
+            <option>MPV</option>
+            <option>Luxury MPV</option>
+            <option>Hybrid MPV</option>
+            <option>Coach/Bus</option>
+            <option>Van/MUV</option>
+          </select>
+        </div>
       </div>
       <div class="f2">
-        <div class="fg"><label class="flbl">Seats</label><input type="number" id="cm-seats" class="fc" value="7" min="1"/></div>
-        <div class="fg"><label class="flbl">Price per Day (&#8377;)</label><input type="number" id="cm-price" class="fc" placeholder="4000"/></div>
+        <div class="fg">
+          <label class="flbl">Seating Capacity</label>
+          <input type="number" id="cm-seats" class="fc" value="7" min="1"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Price per Day (&#8377;)</label>
+          <input type="number" id="cm-price" class="fc" placeholder="4000"/>
+        </div>
       </div>
-      <div class="fg"><label class="flbl">Image URL (Unsplash)</label><input type="url" id="cm-img" class="fc" placeholder="https://images.unsplash.com/..."/></div>
-      <div class="fg"><label class="flbl">Description</label><textarea id="cm-desc" class="fc" rows="2" placeholder="Short vehicle description..."></textarea></div>
+      <div class="fg">
+        <label class="flbl">Image URL (Unsplash link)</label>
+        <input type="url" id="cm-img" class="fc" placeholder="https://images.unsplash.com/..."/>
+      </div>
+      <div class="fg">
+        <label class="flbl">Description</label>
+        <textarea id="cm-desc" class="fc" rows="2" placeholder="Short vehicle description..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="flbl">Features (comma separated)</label>
+        <input type="text" id="cm-feats" class="fc" placeholder="AC, Pushback Seats, USB Charging, GPS"/>
+      </div>
     </div>
-    <div class="modal-ft"><button class="btn btn-oy" onclick="closeModal('car-mod')">Cancel</button><button class="btn btn-y" onclick="saveCar()"><i class="fas fa-save"></i> Save Vehicle</button></div>
+    <div class="modal-ft">
+      <button class="btn btn-oy" onclick="closeModal('car-mod')">Cancel</button>
+      <button class="btn btn-y" onclick="saveCar()"><i class="fas fa-save"></i> Save Vehicle</button>
+    </div>
   </div>
 </div>
-<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<a href="https://wa.me/919876543210" class="wa-float" target="_blank" title="WhatsApp Support">
+  <i class="fab fa-whatsapp"></i>
+</a>
 <div id="toasts"></div>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script>
-  firebase.initializeApp({
-   apiKey: "AIzaSyDZXs-SQvcryKtDh4UjH6ZPAIqY5nMx2lg",
-  authDomain: "kashmir-hosts.firebaseapp.com",
-  projectId: "kashmir-hosts",
-  storageBucket: "kashmir-hosts.firebasestorage.app",
-  messagingSenderId: "129450992454",
-  appId: "1:129450992454:web:3b47749fee0d459ad37b47"
-  });
-  </script>
-  <script src="js/main.js"></script>
+
+<!-- Firebase Compat SDK — replace YOUR_* with real credentials -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({
+  apiKey:            "YOUR_API_KEY",
+  authDomain:        "YOUR_PROJECT.firebaseapp.com",
+  projectId:         "YOUR_PROJECT_ID",
+  storageBucket:     "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId:             "YOUR_APP_ID"
+});
+</script>
+<script src="js/main.js"></script>
 </body>
 </html>
