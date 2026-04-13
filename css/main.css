@@ -156,7 +156,7 @@
 .divider { height: 1px; background: rgba(10,37,64,.1); margin: 14px 0; }
 
 /* SECTION HEADERS */
-.stag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sky); margin-bottom: 10px; }
+.stag { display: inline-block; font-size: 14px; font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sky); margin-bottom: 10px; }
 .stag-pk { color: var(--pk) !important; }
 .stag-gold { color: var(--gold) !important; }
 .sh2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4.5vw,50px); font-weight: 700; color: var(--text); line-height: 1.15; margin-bottom: 14px; }
