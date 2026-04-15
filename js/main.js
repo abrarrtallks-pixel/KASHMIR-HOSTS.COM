@@ -135,9 +135,14 @@ function updateNavUser(user){
 
 function doLogout(){
   var auth = getFirebaseAuth();
-  if(auth){ auth.signOut(); }
-  toast('Logged out','ok');
-  setTimeout(function(){ location.href='index.html'; }, 800);
+  if(auth){
+    auth.signOut().then(function(){
+      toast('Logged out','ok');
+      setTimeout(function(){ location.href='index.html'; }, 600);
+    });
+  } else {
+    location.href='index.html';
+  }
 }
 
 // Listen for auth state
@@ -149,6 +154,16 @@ document.addEventListener('DOMContentLoaded', function(){
       if(user){
         var pending = localStorage.getItem('kh_cart_pending');
         if(pending){ try{ Cart.add(JSON.parse(pending)); }catch(e){} localStorage.removeItem('kh_cart_pending'); }
+        // If user is already logged in and visits login.html, redirect them away
+        if(window.location.pathname.indexOf('login.html') !== -1 ||
+           window.location.href.indexOf('login.html') !== -1){
+          // Already logged in — send to correct page
+          if(user.email === 'admin@kashmirhosts.com'){
+            location.href = 'admin.html';
+          } else {
+            location.href = 'dashboard.html';
+          }
+        }
       }
     });
   } else {
@@ -391,6 +406,39 @@ function buildCarCard(c, i, compact){
     '<i class="fas fa-calendar-check"></i> Book</button></div></div></div></div>';
 }
 
+/* ─── LOAD FIRESTORE TOURS/CARS INTO GLOBAL ARRAYS ─────────── */
+function loadFirestoreData(cb){
+  var db = getFirestore();
+  if(!db){ if(cb) cb(); return; }
+  var done = 0;
+  function check(){ done++; if(done>=2 && cb) cb(); }
+  db.collection('tours').get().then(function(snap){
+    snap.docs.forEach(function(d){
+      var t = Object.assign({id:d.id}, d.data());
+      if(!t.label) t.label = t.cat||'Tour';
+      if(!t.nights) t.nights = Math.max(0,(t.days||1)-1);
+      if(!t.inc) t.inc = ['Hotel','Meals','Transport'];
+      if(!t.itin) t.itin = [];
+      if(!t.img) t.img = 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=700&q=80';
+      var i = TOURS.findIndex(function(x){ return x.id===t.id; });
+      if(i>-1) TOURS[i]=t; else TOURS.push(t);
+    });
+    check();
+  }).catch(check);
+  db.collection('cars').get().then(function(snap){
+    snap.docs.forEach(function(d){
+      var c = Object.assign({id:d.id}, d.data());
+      if(!c.sub) c.sub = c.type||'Vehicle';
+      if(!c.feats) c.feats = ['AC'];
+      if(!c.sp) c.sp = {eng:'Diesel',kmpl:'14 kmpl',boot:'Large'};
+      if(!c.img) c.img = 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=700&q=80';
+      var i = CARS.findIndex(function(x){ return x.id===c.id; });
+      if(i>-1) CARS[i]=c; else CARS.push(c);
+    });
+    check();
+  }).catch(check);
+}
+
 /* ─── HOME PAGE ──────────────────────────────────────────── */
 function initHome(){
   if(!document.getElementById('hero')) return;
@@ -427,20 +475,13 @@ function initHome(){
     });
   });
 
-  // Featured tours
-  var ft = document.getElementById('feat-tours');
-  if(ft){
-    ft.innerHTML = TOURS.slice(0,3).map(function(t,i){ return buildTourCard(t,i); }).join('');
-    runAnims();
-  }
-
-  // Featured vehicles
-  var fv = document.getElementById('feat-vehicles');
-  if(fv){
-    fv.innerHTML = CARS.slice(0,3).map(function(c,i){ return buildCarCard(c,i,true); }).join('');
-    runAnims();
-  }
-
+  // Load Firestore custom tours/cars first, then render
+  loadFirestoreData(function(){
+    var ft = document.getElementById('feat-tours');
+    if(ft){ ft.innerHTML = TOURS.slice(0,3).map(function(t,i){ return buildTourCard(t,i); }).join(''); runAnims(); }
+    var fv = document.getElementById('feat-vehicles');
+    if(fv){ fv.innerHTML = CARS.slice(0,3).map(function(c,i){ return buildCarCard(c,i,true); }).join(''); runAnims(); }
+  });
   initTestimonials();
 }
 
@@ -581,7 +622,8 @@ function initTours(){
     if(c) c.textContent = 'Showing '+data.length+' package'+(data.length!==1?'s':'');
     runAnims();
   }
-  render();
+  // Load Firestore data first, then render
+  loadFirestoreData(render);
 
   qsa('.fbtn').forEach(function(b){
     b.addEventListener('click', function(){
@@ -620,8 +662,10 @@ window.toggleItinerary = function(id){
 function initCars(){
   var g = document.getElementById('cars-grid');
   if(!g) return;
-  g.innerHTML = CARS.map(function(c,i){ return buildCarCard(c,i); }).join('');
-  runAnims();
+  loadFirestoreData(function(){
+    g.innerHTML = CARS.map(function(c,i){ return buildCarCard(c,i); }).join('');
+    runAnims();
+  });
 }
 
 /* ─── BOOK / CART ────────────────────────────────────────── */
@@ -741,13 +785,24 @@ window.handleLogin = function(e){
     if(btn){ btn.disabled=false; btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In'; }
     return;
   }
-  auth.signInWithEmailAndPassword(email, pass).then(function(){
-    toast('Welcome back! 🏔️','ok');
-    var redir = localStorage.getItem('kh_redirect')||'dashboard.html';
+  auth.signInWithEmailAndPassword(email, pass).then(function(cred){
+    var user = cred.user;
+    // Always clear any stored redirect first — admin must NEVER be sent to dashboard
+    var storedRedir = localStorage.getItem('kh_redirect');
     localStorage.removeItem('kh_redirect');
-    setTimeout(function(){ location.href=redir; }, 800);
+    toast('Welcome back! 🏔️','ok');
+    // Admin email ALWAYS goes to admin panel — no exceptions
+    if(user.email === 'admin@kashmirhosts.com'){
+      setTimeout(function(){ location.href='admin.html'; }, 600);
+    } else {
+      // Regular user — use stored redirect or default to dashboard
+      var dest = (storedRedir && storedRedir !== 'admin.html') ? storedRedir : 'dashboard.html';
+      setTimeout(function(){ location.href=dest; }, 600);
+    }
   }).catch(function(err){
-    var msg = err.code==='auth/invalid-credential'||err.code==='auth/wrong-password'||err.code==='auth/user-not-found'
+    var code = err.code||'';
+    var msg = (code==='auth/invalid-credential'||code==='auth/wrong-password'||
+               code==='auth/user-not-found'||code==='auth/invalid-email')
       ? 'Invalid email or password. Please check and try again.' : err.message;
     if(errEl){ errEl.innerHTML='<i class="fas fa-exclamation-circle"></i> '+msg; errEl.style.display='flex'; }
     if(btn){ btn.disabled=false; btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In'; }
@@ -809,10 +864,16 @@ window.handleGoogle = function(){
         }
       });
     }
-    toast('Signed in with Google! 🎉','ok');
-    var redir = localStorage.getItem('kh_redirect')||'dashboard.html';
+    var u2 = result.user;
+    var storedRedir2 = localStorage.getItem('kh_redirect');
     localStorage.removeItem('kh_redirect');
-    setTimeout(function(){ location.href=redir; }, 800);
+    toast('Signed in with Google! 🎉','ok');
+    if(u2.email === 'admin@kashmirhosts.com'){
+      setTimeout(function(){ location.href='admin.html'; }, 600);
+    } else {
+      var dest2 = (storedRedir2 && storedRedir2 !== 'admin.html') ? storedRedir2 : 'dashboard.html';
+      setTimeout(function(){ location.href=dest2; }, 600);
+    }
   }).catch(function(err){ toast(err.message,'err'); });
 };
 
@@ -839,12 +900,16 @@ window.checkPwStrength = function(val){
 function initDashboard(){
   var tabOverview = document.getElementById('tab-overview');
   if(!tabOverview) return;
+  // If adm-gate exists this is admin.html — do NOT run user dashboard logic here
+  if(document.getElementById('adm-gate')) return;
 
   var auth = getFirebaseAuth();
   if(!auth){ location.href='login.html'; return; }
 
   auth.onAuthStateChanged(function(user){
-    if(!user){ localStorage.setItem('kh_redirect','dashboard.html'); location.href='login.html'; return; }
+    if(!user){ location.href='login.html'; return; }
+    // Admin should not be on user dashboard — send them to admin panel
+    if(user.email === 'admin@kashmirhosts.com'){ location.href='admin.html'; return; }
     var name = user.displayName || user.email.split('@')[0];
     var dsbn = document.getElementById('dsb-name');
     var dsbav = document.getElementById('dsb-av');
@@ -983,6 +1048,55 @@ var aTours = TOURS.slice();
 var aCars = CARS.slice();
 var editTId = null, editCId = null;
 
+/* ─── ADMIN PAGE INIT ─────────────────────────────────────── */
+function initAdmin(){
+  // Only run on admin.html
+  if(!document.getElementById('adm-panel')) return;
+
+  var gate = document.getElementById('adm-gate');
+  var pn   = document.getElementById('adm-panel');
+
+  // Show gate spinner while checking auth
+  if(gate) gate.style.display = 'flex';
+  if(pn)   pn.style.display   = 'none';
+
+  var auth = getFirebaseAuth();
+  if(!auth){
+    // Firebase credentials not set — show message in gate
+    if(gate) gate.querySelector('p').textContent = 'Firebase not configured. Please set up firebase credentials in the HTML file.';
+    return;
+  }
+
+  // Give Firebase max 6s to check auth, then redirect if no response
+  var authTimeout = setTimeout(function(){
+    toast('Session expired. Please login again.','warn');
+    setTimeout(function(){ location.href = 'login.html'; }, 800);
+  }, 6000);
+
+  auth.onAuthStateChanged(function(user){
+    clearTimeout(authTimeout);
+    if(user && user.email === 'admin@kashmirhosts.com'){
+      // ✅ Valid admin — hide gate, show panel
+      if(gate) gate.style.display = 'none';
+      if(pn)   pn.style.display   = 'grid';
+      // Set admin display name
+      var admName = document.getElementById('adm-name');
+      var admAv   = document.getElementById('adm-av');
+      if(admName) admName.textContent = user.displayName || 'Gazanfar Khan';
+      if(admAv)   admAv.textContent   = (user.displayName || 'G').charAt(0).toUpperCase();
+      loadAdminData();
+    } else if(user){
+      // ❌ Logged in but NOT admin
+      toast('Access denied. Admin accounts only.','err');
+      setTimeout(function(){ location.href = 'dashboard.html'; }, 1500);
+    } else {
+      // ❌ Not logged in — redirect to login
+      toast('Please login with admin credentials.','warn');
+      setTimeout(function(){ location.href = 'login.html'; }, 1500);
+    }
+  });
+}
+
 window.adminLogin = function(){
   var email = document.getElementById('adm-email')&&document.getElementById('adm-email').value;
   var pass = document.getElementById('adm-pass')&&document.getElementById('adm-pass').value;
@@ -1011,16 +1125,48 @@ window.adminLogin = function(){
 };
 window.adminLogout = function(){
   var auth = getFirebaseAuth();
-  if(auth) auth.signOut();
-  var lo=document.getElementById('adm-login'), pn=document.getElementById('adm-panel');
-  if(pn) pn.style.display='none';
-  if(lo) lo.style.display='flex';
+  if(auth){
+    auth.signOut().then(function(){
+      location.href='login.html';
+    });
+  } else {
+    location.href='login.html';
+  }
   toast('Logged out','info');
 };
 
 function loadAdminData(){
   var db = getFirestore();
   if(!db){ toast('Firebase not configured','err'); return; }
+  // Load custom tours from Firestore and merge with default TOURS
+  db.collection('tours').get().then(function(snap){
+    snap.docs.forEach(function(d){
+      var t = Object.assign({id:d.id}, d.data());
+      if(!t.label) t.label = t.cat||'Tour';
+      if(!t.nights) t.nights = (t.days||1)-1;
+      if(!t.inc) t.inc = ['Hotel','Meals','Transport'];
+      if(!t.itin) t.itin = [];
+      var idx = aTours.findIndex(function(x){ return x.id===t.id; });
+      if(idx>-1) aTours[idx]=t; else aTours.push(t);
+      var gi = TOURS.findIndex(function(x){ return x.id===t.id; });
+      if(gi>-1) TOURS[gi]=t; else TOURS.push(t);
+    });
+    renderAdminTours();
+  }).catch(function(){});
+  // Load custom vehicles from Firestore
+  db.collection('cars').get().then(function(snap){
+    snap.docs.forEach(function(d){
+      var c = Object.assign({id:d.id}, d.data());
+      if(!c.sub) c.sub = c.type||'Vehicle';
+      if(!c.feats) c.feats = ['AC'];
+      if(!c.sp) c.sp = {eng:'',kmpl:'',boot:''};
+      var idx = aCars.findIndex(function(x){ return x.id===c.id; });
+      if(idx>-1) aCars[idx]=c; else aCars.push(c);
+      var gi = CARS.findIndex(function(x){ return x.id===c.id; });
+      if(gi>-1) CARS[gi]=c; else CARS.push(c);
+    });
+    renderAdminCars();
+  }).catch(function(){});
   db.collection('bookings').get().then(function(snap){
     var bks = snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
     var rev = bks.reduce(function(s,b){ return s+(b.total||0); },0);
@@ -1108,16 +1254,19 @@ window.openTourMod = function(id){
   function gi(s){ return document.getElementById(s); }
   var title = gi('tm-title'); if(title) title.textContent = id?'Edit Tour':'Add New Tour';
   if(t){
-    if(gi('tm-name')) gi('tm-name').value=t.name;
-    if(gi('tm-cat')) gi('tm-cat').value=t.cat;
-    if(gi('tm-days')) gi('tm-days').value=t.days;
-    if(gi('tm-price')) gi('tm-price').value=t.price;
-    if(gi('tm-img')) gi('tm-img').value=t.img||'';
-    if(gi('tm-desc')) gi('tm-desc').value=t.desc||'';
+    if(gi('tm-name'))   gi('tm-name').value   = t.name||'';
+    if(gi('tm-cat'))    gi('tm-cat').value     = t.cat||'nature';
+    if(gi('tm-days'))   gi('tm-days').value    = t.days||3;
+    if(gi('tm-price'))  gi('tm-price').value   = t.price||'';
+    if(gi('tm-old'))    gi('tm-old').value     = t.old||'';
+    if(gi('tm-rating')) gi('tm-rating').value  = t.rating||'';
+    if(gi('tm-img'))    gi('tm-img').value     = t.img||'';
+    if(gi('tm-desc'))   gi('tm-desc').value    = t.desc||'';
+    if(gi('tm-inc'))    gi('tm-inc').value     = (t.inc||[]).join(', ');
   } else {
-    ['tm-name','tm-img','tm-desc'].forEach(function(s){ var e=gi(s); if(e)e.value=''; });
-    if(gi('tm-days')) gi('tm-days').value=3;
-    if(gi('tm-price')) gi('tm-price').value='';
+    ['tm-name','tm-img','tm-desc','tm-old','tm-rating','tm-inc'].forEach(function(s){ var e=gi(s); if(e)e.value=''; });
+    if(gi('tm-days'))  gi('tm-days').value  = 3;
+    if(gi('tm-price')) gi('tm-price').value = '';
   }
   var mod=document.getElementById('tour-mod'); if(mod) mod.classList.add('show');
 };
@@ -1126,21 +1275,45 @@ window.saveTour = function(){
   function gi(s){ return document.getElementById(s); }
   var name=gi('tm-name')&&gi('tm-name').value.trim(), price=Number(gi('tm-price')&&gi('tm-price').value);
   if(!name||!price){ toast('Fill all required fields','warn'); return; }
-  var data={name:name,cat:gi('tm-cat')&&gi('tm-cat').value,days:Number(gi('tm-days')&&gi('tm-days').value),price:price,
-    img:gi('tm-img')&&gi('tm-img').value||'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=400',
-    desc:gi('tm-desc')&&gi('tm-desc').value||''};
+  var incRaw = gi('tm-inc') && gi('tm-inc').value;
+  var incArr = incRaw ? incRaw.split(',').map(function(s){return s.trim();}).filter(Boolean) : ['Hotel','Meals','Transport','Guide'];
+  var daysVal = Number(gi('tm-days')&&gi('tm-days').value)||3;
+  var data={
+    name: name,
+    cat: gi('tm-cat')&&gi('tm-cat').value||'nature',
+    days: daysVal,
+    nights: Math.max(0, daysVal-1),
+    price: price,
+    old: Number(gi('tm-old')&&gi('tm-old').value)||Math.round(price*1.2),
+    rating: parseFloat(gi('tm-rating')&&gi('tm-rating').value)||4.8,
+    rev: 0,
+    img: gi('tm-img')&&gi('tm-img').value||'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=400',
+    desc: gi('tm-desc')&&gi('tm-desc').value||'',
+    inc: incArr,
+    itin: [],
+    label: ''
+  };
+  // Auto-generate label from cat
+  var catLabels = {nature:'🌿 Nature',adventure:'⛷️ Adventure',romance:'💑 Romance',family:'👨‍👩‍👧 Family',ladies:'🌸 Ladies Escape',solo:'🎒 Solo',pilgrimage:'🕌 Pilgrimage'};
+  data.label = catLabels[data.cat] || data.cat;
   var db=getFirestore();
   var p = editTId && db ? db.collection('tours').doc(editTId).set(data,{merge:true}) : (db ? db.collection('tours').add(data).then(function(ref){ data.id=ref.id; editTId=ref.id; }) : Promise.resolve());
   p.then(function(){
     var idx=aTours.findIndex(function(t){ return t.id===editTId; });
     data.id=editTId||data.id;
     if(idx>-1) aTours[idx]=Object.assign(aTours[idx],data); else aTours.push(data);
+    // Also update the global TOURS array so live pages reflect changes
+    var tidx=TOURS.findIndex(function(t){ return t.id===editTId; });
+    if(tidx>-1) TOURS[tidx]=Object.assign(TOURS[tidx],data); else TOURS.push(data);
     renderAdminTours(); window.closeModal('tour-mod'); toast(editTId?'Tour updated!':'Tour added!','ok');
   }).catch(function(){ renderAdminTours(); window.closeModal('tour-mod'); toast('Saved locally','ok'); });
 };
 window.deleteTour = function(id){
   if(!confirm('Delete this tour?')) return;
   aTours = aTours.filter(function(t){ return t.id!==id; });
+  // Also remove from global TOURS
+  var tdi = TOURS.findIndex(function(t){ return t.id===id; });
+  if(tdi>-1) TOURS.splice(tdi,1);
   var db=getFirestore(); if(db) db.collection('tours').doc(id).delete().catch(function(){});
   renderAdminTours(); toast('Tour deleted','info');
 };
@@ -1150,16 +1323,17 @@ window.openCarMod = function(id){
   function gi(s){ return document.getElementById(s); }
   var title=gi('cm-title'); if(title) title.textContent=id?'Edit Vehicle':'Add Vehicle';
   if(c){
-    if(gi('cm-name')) gi('cm-name').value=c.name;
-    if(gi('cm-type')) gi('cm-type').value=c.type;
-    if(gi('cm-seats')) gi('cm-seats').value=c.seats;
-    if(gi('cm-price')) gi('cm-price').value=c.ppd;
-    if(gi('cm-img')) gi('cm-img').value=c.img||'';
-    if(gi('cm-desc')) gi('cm-desc').value=c.desc||'';
+    if(gi('cm-name'))  gi('cm-name').value  = c.name||'';
+    if(gi('cm-type'))  gi('cm-type').value  = c.type||'MPV';
+    if(gi('cm-seats')) gi('cm-seats').value = c.seats||7;
+    if(gi('cm-price')) gi('cm-price').value = c.ppd||'';
+    if(gi('cm-img'))   gi('cm-img').value   = c.img||'';
+    if(gi('cm-desc'))  gi('cm-desc').value  = c.desc||'';
+    if(gi('cm-feats')) gi('cm-feats').value = (c.feats||[]).join(', ');
   } else {
-    ['cm-name','cm-img','cm-desc'].forEach(function(s){ var e=gi(s); if(e)e.value=''; });
-    if(gi('cm-seats')) gi('cm-seats').value=7;
-    if(gi('cm-price')) gi('cm-price').value='';
+    ['cm-name','cm-img','cm-desc','cm-feats'].forEach(function(s){ var e=gi(s); if(e)e.value=''; });
+    if(gi('cm-seats')) gi('cm-seats').value = 7;
+    if(gi('cm-price')) gi('cm-price').value = '';
   }
   var mod=document.getElementById('car-mod'); if(mod) mod.classList.add('show');
 };
@@ -1168,21 +1342,39 @@ window.saveCar = function(){
   function gi(s){ return document.getElementById(s); }
   var name=gi('cm-name')&&gi('cm-name').value.trim(), price=Number(gi('cm-price')&&gi('cm-price').value);
   if(!name||!price){ toast('Fill all required fields','warn'); return; }
-  var data={name:name,type:gi('cm-type')&&gi('cm-type').value,seats:Number(gi('cm-seats')&&gi('cm-seats').value),ppd:price,
-    img:gi('cm-img')&&gi('cm-img').value||'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400',
-    desc:gi('cm-desc')&&gi('cm-desc').value||''};
+  var featsRaw = gi('cm-feats') && gi('cm-feats').value;
+  var featsArr = featsRaw ? featsRaw.split(',').map(function(s){return s.trim();}).filter(Boolean) : ['AC','Music System'];
+  var seatsVal = Number(gi('cm-seats')&&gi('cm-seats').value)||7;
+  var data={
+    name: name,
+    type: gi('cm-type')&&gi('cm-type').value||'MPV',
+    sub:  (gi('cm-type')&&gi('cm-type').value||'MPV')+' '+seatsVal+'-Seater',
+    seats: seatsVal,
+    ppd: price,
+    ppk: Math.round(price/130),
+    img: gi('cm-img')&&gi('cm-img').value||'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400',
+    desc: gi('cm-desc')&&gi('cm-desc').value||'',
+    feats: featsArr,
+    sp: {eng:'Diesel',kmpl:'14 kmpl',boot:'Large'}
+  };
   var db=getFirestore();
   var p=editCId&&db ? db.collection('cars').doc(editCId).set(data,{merge:true}) : (db?db.collection('cars').add(data).then(function(ref){ data.id=ref.id; editCId=ref.id; }):Promise.resolve());
   p.then(function(){
     var idx=aCars.findIndex(function(c){ return c.id===editCId; });
     data.id=editCId||data.id;
     if(idx>-1) aCars[idx]=Object.assign(aCars[idx],data); else aCars.push(data);
+    // Also update the global CARS array
+    var cidx=CARS.findIndex(function(c){ return c.id===editCId; });
+    if(cidx>-1) CARS[cidx]=Object.assign(CARS[cidx],data); else CARS.push(data);
     renderAdminCars(); window.closeModal('car-mod'); toast(editCId?'Vehicle updated!':'Vehicle added!','ok');
   }).catch(function(){ renderAdminCars(); window.closeModal('car-mod'); toast('Saved locally','ok'); });
 };
 window.deleteCar = function(id){
   if(!confirm('Delete this vehicle?')) return;
   aCars=aCars.filter(function(c){ return c.id!==id; });
+  // Also remove from global CARS
+  var cdi = CARS.findIndex(function(c){ return c.id===id; });
+  if(cdi>-1) CARS.splice(cdi,1);
   var db=getFirestore(); if(db) db.collection('cars').doc(id).delete().catch(function(){});
   renderAdminCars(); toast('Vehicle deleted','info');
 };
@@ -1283,8 +1475,9 @@ document.addEventListener('DOMContentLoaded', function(){
   initBook();
   initDashboard();
   initPrivacy();
-  // Admin tab listeners
-  if(document.getElementById('adm-login')){
+  // Admin page init (triggered by adm-gate element in admin.html)
+  if(document.getElementById('adm-gate')){
+    initAdmin();
     qsa('.dn[data-tab]').forEach(function(n){
       n.addEventListener('click', function(e){ e.preventDefault(); switchATab(n.dataset.tab); });
     });
